@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1a56db;
+  --color-primary-dark: #1239a0;
+  --color-primary-light: #eff6ff;
+  --color-navy: #0f2b5b;
+  --color-navy-dark: #071a38;
+  --color-accent: #e85d04;
+  --color-accent-light: #fff7ed;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-border: #cbd5e1;
+  --color-bg: #f8fafc;
+  --color-success: #059669;
+  --color-white: #ffffff;
+  --font-sans: "Noto Sans KR", system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --background: #f8fafc;
+  --foreground: #1e293b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 폼 포커스 */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1a56db !important;
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+}
+
+/* 체크박스 커스텀 */
+input[type="checkbox"] {
+  accent-color: #1a56db;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+/* 애니메이션 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 93, 4, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(232, 93, 4, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 93, 4, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.btn-pulse {
+  animation: pulse-ring 2s infinite;
+}
+
+/* 섹션 구분선 */
+.section-divider {
+  width: 48px;
+  height: 4px;
+  background: #1a56db;
+  border-radius: 2px;
+}
+
+/* 헤더 그라디언트 */
+.hero-gradient {
+  background: linear-gradient(135deg, #0f2b5b 0%, #1a3a7a 50%, #1a56db 100%);
+}
+
+/* 신뢰 바 */
+.trust-bar {
+  background: linear-gradient(90deg, #1a56db 0%, #1239a0 100%);
+}
+
+/* 카드 호버 */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 43, 91, 0.12);
+}
+
+/* CTA 버튼 */
+.btn-accent {
+  background: linear-gradient(135deg, #e85d04 0%, #c84b00 100%);
+  transition: all 0.2s ease;
+}
+.btn-accent:hover {
+  background: linear-gradient(135deg, #c84b00 0%, #a83d00 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(232, 93, 4, 0.35);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1a56db 0%, #1239a0 100%);
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1239a0 0%, #0e2d7a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(26, 86, 219, 0.35);
+}
+
+/* 프로세스 스텝 라인 */
+.step-connector {
+  position: absolute;
+  top: 24px;
+  left: calc(50% + 40px);
+  right: calc(-50% + 40px);
+  height: 2px;
+  background: linear-gradient(90deg, #1a56db, #93c5fd);
+}
