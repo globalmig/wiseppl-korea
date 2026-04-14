@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ConsultForm from "./_components/ConsultForm";
 import FAQAccordion from "./_components/FAQAccordion";
+import HeaderCTAButton from "./_components/HeaderCTAButton";
 
 const keyMessages = ["나만의 보장 분석 전문가에게 보험 상담", "무료 상담 제공", "맞춤형 보험 점검 서비스"];
 
@@ -166,7 +167,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section id="section-coverage" className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-28">
+      <section id="section-coverage" className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-16">
         {/* background blobs */}
         <div className="pointer-events-none absolute inset-0 -z-0">
           <div className="absolute -top-32 -right-32 h-[520px] w-[520px] rounded-full bg-[#dbeafe] opacity-50 blur-[96px]" />
@@ -233,7 +234,7 @@ export default function Home() {
               </div>
             </div>
 
-            <Image src="/hero/hero_thinking.jpg" alt="보험 전문가 상담" width={720} height={460} className="w-full md:max-w-[40%] lg:max-w-[50%] rounded-t-3xl object-cover" priority />
+            <Image src="/hero/hero_thinking.jpg" alt="보험 전문가 상담" width={720} height={460} className="w-full md:max-w-[30%] lg:max-w-[40%] rounded-t-3xl object-cover" priority />
 
             {/* right floating card — 상세 리포트 */}
             <div className="absolute right-0 top-1/4 hidden lg:block animate-float-alt z-10">
@@ -293,20 +294,90 @@ export default function Home() {
         </div>
       </section>
 
-      <InfoSection
-        eyebrow="01. 메인 메시지"
-        title="나만의 보장 분석 전문가에게 받는 보험 상담"
-        description="보험을 새로 가입시키기보다 지금 가지고 있는 보장을 먼저 점검하고, 필요한 부분을 이해하기 쉽게 설명하는 상담 흐름입니다."
-        items={keyMessages}
-      />
+      <section className="coverage-01 relative overflow-hidden bg-white py-16 sm:py-20">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#dbeafe] opacity-40 blur-[80px]" />
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+          {/* eyebrow */}
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">01</span>
+              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">주요 내용</span>
+            </div>
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+          </div>
+          {/* headline */}
+          <div className="mt-6 text-center">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
+              나만의 보장 분석 전문가에게
+              <br />
+              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">받는 보험 상담</span>
+            </h2>
+            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">
+              보험을 새로 가입시키기보다 지금 가지고 있는 보장을 먼저 점검하고,
+              <br className="hidden sm:block" /> 필요한 부분을 이해하기 쉽게 설명하는 상담 흐름입니다.
+            </p>
+          </div>
+          {/* feature cards */}
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {[
+              { src: "/icon/call.jpg", alt: "보장 분석 전문가", label: keyMessages[0] },
+              { src: "/icon/free.jpg", alt: "무료 상담", label: keyMessages[1] },
+              { src: "/icon/partner.jpg", alt: "맞춤 점검 서비스", label: keyMessages[2] },
+            ].map(({ src, alt, label }, i) => (
+              <div key={i} className="flex flex-col items-center gap-4 rounded-3xl border border-[#dbeafe] bg-white px-6 py-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                <span className="flex h-24 w-32 items-center justify-center rounded-2xl overflow-hidden">
+                  <Image src={src} alt={alt} width={120} height={80} className="h-full w-full object-contain" />
+                </span>
+                <p className="text-sm font-bold leading-snug text-[#0f2b5b]">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <InfoSection
-        eyebrow="02. 주요 혜택"
-        title="복잡한 보험도 일정부터 분석 결과까지 한 번에"
-        description="상담 예약의 편의성과 분석 품질, 부담 없는 상담 방식까지 실제 이용 과정에서 체감하는 장점을 정리했습니다."
-        items={benefits}
-        variant="accent"
-      />
+      <section className="coverage-02 relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+          {/* eyebrow */}
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">02</span>
+              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">주요 혜택</span>
+            </div>
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+          </div>
+          {/* headline */}
+          <div className="mt-6 text-center">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
+              복잡한 보험도
+              <br />
+              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">한 번에 해결</span>
+            </h2>
+            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">
+              상담 예약의 편의성과 분석 품질, 부담 없는 상담 방식까지
+              <br className="hidden sm:block" /> 실제 이용 과정에서 체감하는 장점을 정리했습니다.
+            </p>
+          </div>
+          {/* benefits list */}
+          <div className="mt-10 mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5">
+            {benefits.map((item, i) => (
+              <div
+                key={item}
+                className={`flex items-center gap-4 rounded-2xl border border-[#dbeafe] bg-white px-10 py-8 md:py-10 shadow-sm${benefits.length % 2 !== 0 && i === benefits.length - 1 ? " sm:col-span-2" : ""}`}
+              >
+                <span className="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">{String(i + 1).padStart(2, "0")}</span>
+                <p className="text-xl font-semibold text-[#1e293b] leading-snug">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <InfoSection
         eyebrow="03. 보험 상담 필요성"
@@ -363,7 +434,7 @@ export default function Home() {
         </div>
       </section> */}
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="a-qna bg-white py-16 sm:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <div className="section-divider mx-auto mb-4" />
@@ -490,9 +561,65 @@ export default function Home() {
         </div>
       </section>
 
-      {travelInfoSections.map((section) => (
+      {/* 05-b 상담 서비스 내용 — coverage-01 스타일 */}
+      <section className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">05</span>
+              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">상담 서비스 내용</span>
+            </div>
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+          </div>
+          <div className="mt-6 text-center">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
+              상담에서 확인할 수 있는
+              <br />
+              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">핵심 서비스</span>
+            </h2>
+            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">
+              여행 이벤트와 별개로 실제 상담에서 제공되는
+              <br className="hidden sm:block" /> 서비스 내용을 항목별로 정리했습니다.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {travelSections[1].items.map((item, i) => (
+              <div key={i} className="flex flex-col items-center gap-4 rounded-3xl border border-[#dbeafe] bg-white px-6 py-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#1a56db] text-sm font-black text-white">{String(i + 1).padStart(2, "0")}</span>
+                <p className="text-sm font-bold leading-snug text-[#0f2b5b]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 05-c, 05-d */}
+      {travelInfoSections.slice(1, 3).map((section) => (
         <InfoSection key={section.eyebrow} eyebrow={section.eyebrow} title={section.title} description={section.description} items={[...section.items]} variant={section.variant} />
       ))}
+
+      {/* 05-e FAQ — a-qna 동일 레이아웃 */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <div className="section-divider mx-auto mb-4" />
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f2b5b]">상담 전 자주 묻는 핵심 안내</h2>
+            <p className="mt-3 text-sm sm:text-base text-[#64748b]">상담 전 부담을 줄일 수 있도록 가장 많이 확인하는 내용을 먼저 정리했습니다.</p>
+          </div>
+          <FAQAccordion
+            items={[
+              { q: "상담을 받으면 보험 가입을 강요받나요?", a: "아닙니다. 기존 보험 점검과 보장 분석 중심으로 진행되며, 신규 가입은 고객의 선택에 맡깁니다." },
+              { q: "현재 가입된 보험을 객관적으로 분석해 주나요?", a: "네. 보유 중인 보험 전체를 중립적 시각으로 분석해 보장 현황과 개선 방향을 안내해 드립니다." },
+              { q: "가족 보험도 함께 점검할 수 있나요?", a: "가능합니다. 가족 단위 보장 비교와 통합 관리 방향까지 함께 안내해 드립니다." },
+              { q: "꼭 대면으로 방문해야 상담을 받을 수 있나요?", a: "아닙니다. 전화 또는 비대면 방식으로도 동일한 품질의 보장 분석 상담이 가능합니다." },
+            ]}
+          />
+        </div>
+      </section>
 
       <section id="section-cancer" className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-28">
         {/* background blobs */}
@@ -610,26 +737,99 @@ export default function Home() {
         </div>
       </section>
 
-      {cancerInfoSections.map((section) => (
+      {/* 06-b 핵심 가치 — coverage-01 스타일 */}
+      <section className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">06</span>
+              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">핵심 가치</span>
+            </div>
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+          </div>
+          <div className="mt-6 text-center">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
+              암보험 상담에서 확인하는
+              <br />
+              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">핵심 분석 가치</span>
+            </h2>
+            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">
+              단순 상품 안내가 아니라 현재 보장을 기준으로
+              <br className="hidden sm:block" /> 치료비와 전이암 대응까지 구체적으로 점검합니다.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {(["암 치료비 대비 보장 분석", "전이암까지 보장 설계", "부족한 보장 스마트 분석", "30초 보장 진단"] as const).map((item, i) => (
+              <div key={i} className="flex flex-col items-center gap-4 rounded-3xl border border-[#dbeafe] bg-white px-6 py-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#1a56db] text-sm font-black text-white">{String(i + 1).padStart(2, "0")}</span>
+                <p className="text-sm font-bold leading-snug text-[#0f2b5b]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 06-c, 06-d */}
+      {cancerInfoSections.slice(1, -1).map((section) => (
         <InfoSection key={section.eyebrow} eyebrow={section.eyebrow} title={section.title} description={section.description} items={[...section.items]} variant={section.variant} />
       ))}
 
-      <section className="bg-[#0f2b5b] py-16 sm:py-20">
+      {/* 06-e FAQ — a-qna 동일 레이아웃 */}
+      <section className="bg-white py-16 sm:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="rounded-[2rem] bg-white p-6 shadow-2xl sm:p-8">
-            <div className="text-center">
-              <span className="inline-flex rounded-full bg-[#eff6ff] px-4 py-1.5 text-sm font-bold text-[#1a56db]">CTA</span>
-              <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-[#0f2b5b]">보험 전문 점검 무료 상담 신청</h2>
-            </div>
+          <div className="text-center mb-10">
+            <div className="section-divider mx-auto mb-4" />
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f2b5b]">상담 전 꼭 확인하는 안내 사항</h2>
+            <p className="mt-3 text-sm sm:text-base text-[#64748b]">가입 강요 여부, 가족 보험 점검, 상담 방식과 이벤트 운영 방식까지 자주 묻는 내용을 정리했습니다.</p>
+          </div>
+          <FAQAccordion
+            items={[
+              { q: "상담을 받으면 보험 신규 가입을 강요받나요?", a: "아닙니다. 기존 보험 점검과 보장 분석 중심으로 진행되며, 신규 가입 여부는 고객의 의사에 따라 결정됩니다." },
+              { q: "가족 보험도 함께 점검할 수 있나요?", a: "가능합니다. 가족 단위로 보장을 비교 분석하고 통합 관리 방향을 함께 안내해 드립니다." },
+              { q: "상담은 어떤 방식으로 진행되나요?", a: "보험 전문가가 직접 진행하며, 대면 또는 전화·비대면 방식 중 편한 방법으로 선택하실 수 있습니다." },
+              { q: "이벤트 당첨은 어떻게 결정되나요?", a: "이벤트 참여 조건을 충족한 고객 중 공정한 추첨 방식으로 진행되며, 결과는 개별 안내드립니다." },
+            ]}
+          />
+        </div>
+      </section>
 
-            <form className="mt-8 grid gap-4 sm:grid-cols-2">
+      <section id="consult-form" className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
+        </div>
+        <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-6">
+          <div className="rounded-3xl border border-[#dbeafe] bg-white px-8 py-10 shadow-xl sm:px-10 sm:py-12">
+            {/* eyebrow */}
+            <div className="flex items-center justify-center gap-4">
+              <div className="h-px w-12 bg-[#bfdbfe]" />
+              <div className="flex items-center gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">✓</span>
+                <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">무료 상담 신청</span>
+              </div>
+              <div className="h-px w-12 bg-[#bfdbfe]" />
+            </div>
+            {/* headline */}
+            <div className="mt-6 text-center">
+              <h2 className="text-3xl sm:text-4xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
+                보험 전문 점검
+                <br />
+                <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">무료 상담 신청</span>
+              </h2>
+              <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#64748b]">가입 권유 없이 현재 보험을 객관적으로 분석해 드립니다.</p>
+            </div>
+            {/* form */}
+            <form className="mt-8 grid gap-4">
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#334155]">이름</span>
                 <input
                   type="text"
                   name="name"
                   placeholder="이름을 입력해 주세요"
-                  className="w-full rounded-2xl border border-[#cbd5e1] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
+                  className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
                 />
               </label>
               <label className="block">
@@ -638,13 +838,17 @@ export default function Home() {
                   type="tel"
                   name="phone"
                   placeholder="연락처를 입력해 주세요"
-                  className="w-full rounded-2xl border border-[#cbd5e1] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
+                  className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
                 />
               </label>
-              <button type="submit" className="btn-accent sm:col-span-2 inline-flex items-center justify-center rounded-2xl px-6 py-4 text-base font-bold text-white">
+              <button
+                type="submit"
+                className="btn-accent inline-flex items-center justify-center rounded-2xl px-6 py-4 mt-5 text-base font-bold text-white shadow-lg shadow-[#1a56db]/25 transition hover:shadow-[#1a56db]/40"
+              >
                 보험 전문 점검 무료 상담 신청
               </button>
             </form>
+            <p className="mt-4 text-center text-xs text-[#94a3b8]">가입 권유 없음 · 무료 진행 · 24시간 내 연락</p>
           </div>
         </div>
       </section>

@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 
-const faqs = [
+export type FAQItem = { q: string; a: string };
+
+const defaultFaqs: FAQItem[] = [
   {
     q: "정말 무료인가요?",
     a: "네. 보장 분석 상담과 기본 리포트 제공은 무료로 진행됩니다.",
@@ -21,7 +23,8 @@ const faqs = [
   },
 ];
 
-export default function FAQAccordion() {
+export default function FAQAccordion({ items }: { items?: FAQItem[] }) {
+  const faqs = items ?? defaultFaqs;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
