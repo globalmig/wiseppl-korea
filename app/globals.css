@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+  --animate-float: float 3.2s ease-in-out infinite;
+  --animate-float-alt: float-alt 3.8s ease-in-out infinite;
+
   --color-primary: #1a56db;
   --color-primary-dark: #1239a0;
   --color-primary-light: #eff6ff;
@@ -140,6 +143,16 @@ input[type="checkbox"] {
   background: linear-gradient(135deg, #1239a0 0%, #0e2d7a 100%);
   transform: translateY(-1px);
   box-shadow: 0 8px 20px rgba(26, 86, 219, 0.35);
+}
+
+/* 말풍선 플로팅 애니메이션 */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes float-alt {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(8px); }
 }
 
 /* 프로세스 스텝 라인 */
