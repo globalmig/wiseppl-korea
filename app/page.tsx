@@ -2,6 +2,9 @@ import Image from "next/image";
 import ConsultForm from "./_components/ConsultForm";
 import FAQAccordion from "./_components/FAQAccordion";
 import HeaderCTAButton from "./_components/HeaderCTAButton";
+import MobileNav from "./_components/MobileNav";
+import ScrollToTopButton from "./_components/ScrollToTopButton";
+import ScrollAnimations from "./_components/ScrollAnimations";
 
 const keyMessages = ["나만의 보장 분석 전문가에게 보험 상담", "무료 상담 제공", "맞춤형 보험 점검 서비스"];
 
@@ -116,7 +119,7 @@ function InfoSection({ eyebrow, title, description, items, variant = "light" }: 
   const isAccent = variant === "accent";
 
   return (
-    <section className={isAccent ? "bg-[#eff6ff] py-16 sm:py-20" : "bg-white py-16 sm:py-20"}>
+    <section data-animate className={isAccent ? "bg-[#eff6ff] py-16 sm:py-20" : "bg-white py-16 sm:py-20"}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
@@ -150,42 +153,33 @@ export default function Home() {
               <p className="text-xs text-[#64748b]">보험 보장 분석 상담</p>
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-1">
-            <a href="#section-coverage" className="px-3 py-2 rounded-lg text-sm font-semibold text-text-muted hover:text-primary hover:bg-primary-light transition-colors">
-              보장 분석
-            </a>
-            <a href="#section-travel" className="px-3 py-2 rounded-lg text-sm font-semibold text-text-muted hover:text-primary hover:bg-primary-light transition-colors">
-              여행 이벤트
-            </a>
-            <a href="#section-cancer" className="px-3 py-2 rounded-lg text-sm font-semibold text-text-muted hover:text-primary hover:bg-primary-light transition-colors">
-              암보험
-            </a>
-          </nav>
-          <a href="#consult-form" className="btn-accent rounded-xl px-4 py-2.5 text-sm font-bold text-white">
-            무료 상담 신청
-          </a>
+          <MobileNav />
+          {/* <HeaderCTAButton /> */}
         </div>
       </header>
 
-      <section id="section-coverage" className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-16">
+      <section id="section-coverage" data-animate className="relative scroll-mt-16 overflow-hidden h-[calc(100vh-4rem)] flex flex-col bg-white">
         {/* background blobs */}
         <div className="pointer-events-none absolute inset-0 -z-0">
           <div className="absolute -top-32 -right-32 h-[520px] w-[520px] rounded-full bg-[#dbeafe] opacity-50 blur-[96px]" />
           <div className="absolute top-1/2 -left-24 h-[360px] w-[360px] rounded-full bg-[#bfdbfe] opacity-30 blur-[80px]" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 flex-1 min-h-0 flex flex-col py-4 sm:py-6 lg:py-8">
           {/* eyebrow */}
           <div className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#bfdbfe] bg-[#eff6ff] px-4 py-1.5 text-sm font-semibold text-[#1a56db]">
-              <span className="h-2 w-2 rounded-full bg-[#1a56db]" />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a56db] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1a56db]" />
+              </span>
               보장 분석 전문 무료 상담
             </span>
           </div>
 
           {/* headline */}
-          <div className="mt-6 text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-extrabold leading-[1.1] tracking-tight text-[#0f172a]">
+          <div className="mt-3 text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-[1.1] tracking-tight text-[#0f172a]">
               내 보험, 제대로
               <br />
               <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">분석받으세요</span>
@@ -197,7 +191,7 @@ export default function Home() {
           </div>
 
           {/* CTA row */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href="#consult-form"
               className="inline-flex h-14 items-center justify-center rounded-2xl bg-[#1a56db] px-8 text-base font-bold text-white shadow-lg shadow-[#1a56db]/30 transition hover:bg-[#1648c0]"
@@ -212,7 +206,7 @@ export default function Home() {
             </a>
           </div>
           {/* main hero image + floating cards */}
-          <div className="main_hero_img relative mx-auto mt-20 flex justify-center">
+          <div className="main_hero_img relative mx-auto mt-5 flex justify-center flex-1 min-h-0 items-end w-full">
             {/* left floating card — 보험료 절감 */}
             <div className="absolute left-0 top-1/4 hidden lg:block animate-float z-10">
               <div className="relative w-44 text-center rounded-2xl border border-[#dbeafe] bg-white p-6 shadow-xl">
@@ -234,7 +228,16 @@ export default function Home() {
               </div>
             </div>
 
-            <Image src="/hero/hero_thinking.jpg" alt="보험 전문가 상담" width={720} height={460} className="w-full md:max-w-[30%] lg:max-w-[40%] rounded-t-3xl object-cover" priority />
+            <div className="w-full sm:max-w-[70%] md:max-w-[55%] lg:max-w-[40%] flex items-end">
+              <Image
+                src="/hero/hero_thinking.jpg"
+                alt="보험 전문가 상담"
+                width={720}
+                height={460}
+                priority
+                className="w-full h-auto max-h-[32vh] sm:max-h-[42vh] object-contain object-bottom mix-blend-multiply"
+              />
+            </div>
 
             {/* right floating card — 상세 리포트 */}
             <div className="absolute right-0 top-1/4 hidden lg:block animate-float-alt z-10">
@@ -257,44 +260,44 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          {/* mobile cards (lg 미만) */}
-          <div className="mt-4 grid grid-cols-2 gap-3 lg:hidden mb-10">
-            <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md flex gap-3 items-start">
-              <Image src="/hero/hero_money.jpg" alt="보험료 절감" width={44} height={44} className="h-11 w-11 rounded-xl object-cover flex-shrink-0" />
-              <div>
-                <p className="text-sm font-extrabold text-[#0f2b5b]">보험료 절감</p>
-                <p className="mt-0.5 text-xs text-[#64748b] leading-snug">중복 보장 정리로 평균 5~10% 절감</p>
-              </div>
-            </div>
-            <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md flex gap-3 items-start">
-              <Image src="/hero/hero_contract.jpg" alt="상세 리포트" width={44} height={44} className="h-11 w-11 rounded-xl object-cover flex-shrink-0" />
-              <div>
-                <p className="text-sm font-extrabold text-[#0f2b5b]">상세 리포트</p>
-                <p className="mt-0.5 text-xs text-[#64748b] leading-snug">맞춤 보장 분석 리포트 무료 제공</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* bottom stats bar */}
-        <div className="relative z-10 mt-0 border-t border-[#e2e8f0] bg-[#f8fafc]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-3 divide-x divide-[#e2e8f0]">
-            {[
-              { value: "무료", label: "상담 비용" },
-              { value: "상세", label: "보장 분석 리포트" },
-              { value: "가족", label: "통합 점검 가능" },
-            ].map(({ value, label }) => (
-              <div key={label} className="flex flex-col items-center gap-0.5 px-4 text-center">
-                <span className="text-2xl font-extrabold text-[#1a56db]">{value}</span>
-                <span className="text-xs text-[#64748b]">{label}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      <section className="coverage-01 relative overflow-hidden bg-white py-16 sm:py-20">
+      {/* mobile cards (lg 미만) */}
+      <div className="grid grid-cols-2 gap-3 lg:hidden px-4 py-4 bg-white">
+        <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md flex gap-3 items-start">
+          <Image src="/hero/hero_money.jpg" alt="보험료 절감" width={44} height={44} className="h-11 w-11 rounded-xl object-cover flex-shrink-0" />
+          <div>
+            <p className="text-sm font-extrabold text-[#0f2b5b]">보험료 절감</p>
+            <p className="mt-0.5 text-xs text-[#64748b] leading-snug">중복 보장 정리로 평균 5~10% 절감</p>
+          </div>
+        </div>
+        <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md flex gap-3 items-start">
+          <Image src="/hero/hero_contract.jpg" alt="상세 리포트" width={44} height={44} className="h-11 w-11 rounded-xl object-cover flex-shrink-0" />
+          <div>
+            <p className="text-sm font-extrabold text-[#0f2b5b]">상세 리포트</p>
+            <p className="mt-0.5 text-xs text-[#64748b] leading-snug">맞춤 보장 분석 리포트 무료 제공</p>
+          </div>
+        </div>
+      </div>
+
+      {/* bottom stats bar */}
+      <div className="relative z-10 border-t border-[#e2e8f0] bg-[#f8fafc]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 grid grid-cols-3 divide-x divide-[#e2e8f0]">
+          {[
+            { value: "무료", label: "상담 비용" },
+            { value: "상세", label: "보장 분석 리포트" },
+            { value: "가족", label: "통합 점검 가능" },
+          ].map(({ value, label }) => (
+            <div key={label} className="flex flex-col items-center gap-0.5 px-4 text-center">
+              <span className="text-2xl font-extrabold text-[#1a56db]">{value}</span>
+              <span className="text-xs text-[#64748b]">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <section data-animate className="coverage-01 relative overflow-hidden bg-white py-16 sm:py-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#dbeafe] opacity-40 blur-[80px]" />
         </div>
@@ -338,7 +341,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="coverage-02 relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+      <section data-animate className="coverage-02 relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
         </div>
@@ -434,7 +437,7 @@ export default function Home() {
         </div>
       </section> */}
 
-      <section className="a-qna bg-white py-16 sm:py-20">
+      <section data-animate className="a-qna bg-white py-16 sm:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <div className="section-divider mx-auto mb-4" />
@@ -445,7 +448,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="section-travel" className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-28">
+      <section id="section-travel" data-animate className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-28">
         {/* background blobs */}
         <div className="pointer-events-none absolute inset-0 z-0">
           <div className="absolute -top-24 -left-24 h-[480px] w-[480px] rounded-full bg-[#dbeafe] opacity-50 blur-[96px]" />
@@ -456,7 +459,10 @@ export default function Home() {
           {/* eyebrow */}
           <div className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#bfdbfe] bg-[#eff6ff] px-4 py-1.5 text-sm font-semibold text-[#1a56db]">
-              <span className="h-2 w-2 rounded-full bg-[#1a56db]" />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a56db] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1a56db]" />
+              </span>
               상담 완료 고객 대상 여행 이벤트
             </span>
           </div>
@@ -561,8 +567,51 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 여행 사진 그리드 */}
+      <section data-animate className="relative overflow-hidden bg-white py-16 sm:py-20">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#dbeafe] opacity-40 blur-[80px]" />
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">✈</span>
+              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">여행지 미리보기</span>
+            </div>
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+          </div>
+          <div className="mt-6 text-center">
+            <h2 className="text-3xl sm:text-4xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
+              상담 완료 후 떠나는
+              <br />
+              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">동남아 3박5일</span>
+            </h2>
+            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">리조트 숙박부터 액티비티까지 풀패키지로 제공됩니다.</p>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            {[
+              { label: "발리", sub: "인도네시아 · 리조트 & 해변" },
+              { label: "다낭", sub: "베트남 · 골프 & 해양 스포츠" },
+              { label: "세부", sub: "필리핀 · 다이빙 & 리조트" },
+            ].map(({ label, sub }) => (
+              <div key={label} className="group overflow-hidden rounded-3xl border border-[#dbeafe] bg-[#f8faff] shadow-sm hover:shadow-md transition-shadow">
+                <div className="relative h-52 w-full bg-[#dbeafe] flex items-center justify-center">
+                  <span className="text-4xl">🏝</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f2b5b]/40 to-transparent" />
+                </div>
+                <div className="px-5 py-4">
+                  <p className="text-base font-extrabold text-[#0f2b5b]">{label}</p>
+                  <p className="mt-1 text-xs text-[#64748b]">{sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 05-b 상담 서비스 내용 — coverage-01 스타일 */}
-      <section className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+      <section data-animate className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
         </div>
@@ -603,7 +652,7 @@ export default function Home() {
       ))}
 
       {/* 05-e FAQ — a-qna 동일 레이아웃 */}
-      <section className="bg-white py-16 sm:py-20">
+      <section data-animate className="bg-white py-16 sm:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <div className="section-divider mx-auto mb-4" />
@@ -621,7 +670,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="section-cancer" className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-28">
+      <section id="section-cancer" data-animate className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-28">
         {/* background blobs */}
         <div className="pointer-events-none absolute inset-0 z-0">
           <div className="absolute -top-24 -right-24 h-[480px] w-[480px] rounded-full bg-[#dbeafe] opacity-50 blur-[96px]" />
@@ -632,7 +681,10 @@ export default function Home() {
           {/* eyebrow */}
           <div className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#bfdbfe] bg-[#eff6ff] px-4 py-1.5 text-sm font-semibold text-[#1a56db]">
-              <span className="h-2 w-2 rounded-full bg-[#1a56db]" />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a56db] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1a56db]" />
+              </span>
               암보험 무료 전문가 상담
             </span>
           </div>
@@ -738,7 +790,7 @@ export default function Home() {
       </section>
 
       {/* 06-b 핵심 가치 — coverage-01 스타일 */}
-      <section className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+      <section data-animate className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
         </div>
@@ -779,7 +831,7 @@ export default function Home() {
       ))}
 
       {/* 06-e FAQ — a-qna 동일 레이아웃 */}
-      <section className="bg-white py-16 sm:py-20">
+      <section data-animate className="bg-white py-16 sm:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <div className="section-divider mx-auto mb-4" />
@@ -797,7 +849,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="consult-form" className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+      <section id="consult-form" data-animate className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
         </div>
@@ -808,7 +860,7 @@ export default function Home() {
               <div className="h-px w-12 bg-[#bfdbfe]" />
               <div className="flex items-center gap-2">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">✓</span>
-                <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">무료 상담 신청</span>
+                <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">CONTACT</span>
               </div>
               <div className="h-px w-12 bg-[#bfdbfe]" />
             </div>
@@ -841,6 +893,23 @@ export default function Home() {
                   className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
                 />
               </label>
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-[#334155]">생년월일</span>
+                <input
+                  type="date"
+                  name="birthdate"
+                  className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-[#334155]">지역/주소</span>
+                <input
+                  type="text"
+                  name="region"
+                  placeholder="거주 지역을 입력해 주세요 (예: 서울 강남구)"
+                  className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
+                />
+              </label>
               <button
                 type="submit"
                 className="btn-accent inline-flex items-center justify-center rounded-2xl px-6 py-4 mt-5 text-base font-bold text-white shadow-lg shadow-[#1a56db]/25 transition hover:shadow-[#1a56db]/40"
@@ -852,6 +921,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ScrollAnimations />
+      <ScrollToTopButton />
 
       {/* FOOTER */}
       <footer className="bg-navy py-10">
