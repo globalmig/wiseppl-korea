@@ -2,9 +2,10 @@ import Image from "next/image";
 import ConsultForm from "./_components/ConsultForm";
 import FAQAccordion from "./_components/FAQAccordion";
 import HeaderCTAButton from "./_components/HeaderCTAButton";
-import MobileNav from "./_components/MobileNav";
 import ScrollToTopButton from "./_components/ScrollToTopButton";
 import ScrollAnimations from "./_components/ScrollAnimations";
+import BottomConsultForm from "./_components/BottomConsultForm";
+import Header from "./_components/Header";
 
 const keyMessages = ["나만의 보장 분석 전문가에게 보험 상담", "무료 상담 제공", "맞춤형 보험 점검 서비스"];
 
@@ -139,24 +140,7 @@ function InfoSection({ eyebrow, title, description, items, variant = "light" }: 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      <header className="sticky top-0 z-50 border-b border-[#e2e8f0] bg-white/95 backdrop-blur">
-        <div className="max-w-6xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#eff6ff]">
-              <svg className="h-6 w-6 text-[#1a56db]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 4v5c0 5-3.5 9.5-7 11-3.5-1.5-7-6-7-11V7l7-4z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 12.5l1.8 1.8 3.2-4" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-[#0f2b5b]">WISEPPL KOREA</p>
-              <p className="text-xs text-[#64748b]">보험 보장 분석 상담</p>
-            </div>
-          </div>
-          <MobileNav />
-          {/* <HeaderCTAButton /> */}
-        </div>
-      </header>
+      <Header />
 
       <section id="section-coverage" data-animate className="relative scroll-mt-16 overflow-hidden h-[calc(100vh-4rem)] flex flex-col bg-white">
         {/* background blobs */}
@@ -230,7 +214,7 @@ export default function Home() {
 
             <div className="w-full sm:max-w-[70%] md:max-w-[55%] lg:max-w-[40%] flex items-end">
               <Image
-                src="/hero/hero_thinking.jpg"
+                src="/hero/hero_thinking.png"
                 alt="보험 전문가 상담"
                 width={720}
                 height={460}
@@ -874,49 +858,7 @@ export default function Home() {
               <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#64748b]">가입 권유 없이 현재 보험을 객관적으로 분석해 드립니다.</p>
             </div>
             {/* form */}
-            <form className="mt-8 grid gap-4">
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold text-[#334155]">이름</span>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="이름을 입력해 주세요"
-                  className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold text-[#334155]">연락처</span>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="연락처를 입력해 주세요"
-                  className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold text-[#334155]">생년월일</span>
-                <input
-                  type="date"
-                  name="birthdate"
-                  className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold text-[#334155]">지역/주소</span>
-                <input
-                  type="text"
-                  name="region"
-                  placeholder="거주 지역을 입력해 주세요 (예: 서울 강남구)"
-                  className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
-                />
-              </label>
-              <button
-                type="submit"
-                className="btn-accent inline-flex items-center justify-center rounded-2xl px-6 py-4 mt-5 text-base font-bold text-white shadow-lg shadow-[#1a56db]/25 transition hover:shadow-[#1a56db]/40"
-              >
-                보험 전문 점검 무료 상담 신청
-              </button>
-            </form>
+            <BottomConsultForm />
             <p className="mt-4 text-center text-xs text-[#94a3b8]">가입 권유 없음 · 무료 진행 · 24시간 내 연락</p>
           </div>
         </div>
