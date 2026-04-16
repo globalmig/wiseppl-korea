@@ -552,7 +552,7 @@ export default function Home() {
       </section>
 
       {/* 여행 사진 그리드 */}
-      <section data-animate className="relative overflow-hidden bg-white py-16 sm:py-20">
+      <section data-animate className="relative overflow-hidden bg-white py-24 sm:py-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#dbeafe] opacity-40 blur-[80px]" />
         </div>
@@ -573,29 +573,41 @@ export default function Home() {
             </h2>
             <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">리조트 숙박부터 액티비티까지 풀패키지로 제공됩니다.</p>
           </div>
-          <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            {[
-              { label: "발리", sub: "인도네시아 · 리조트 & 해변" },
-              { label: "다낭", sub: "베트남 · 골프 & 해양 스포츠" },
-              { label: "세부", sub: "필리핀 · 다이빙 & 리조트" },
-            ].map(({ label, sub }) => (
-              <div key={label} className="group overflow-hidden rounded-3xl border border-[#dbeafe] bg-[#f8faff] shadow-sm hover:shadow-md transition-shadow">
-                <div className="relative h-52 w-full bg-[#dbeafe] flex items-center justify-center">
-                  <span className="text-4xl">🏝</span>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f2b5b]/40 to-transparent" />
-                </div>
-                <div className="px-5 py-4">
-                  <p className="text-base font-extrabold text-[#0f2b5b]">{label}</p>
-                  <p className="mt-1 text-xs text-[#64748b]">{sub}</p>
-                </div>
-              </div>
-            ))}
+          <div className="mt-10 grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+            {(() => {
+              const destinations = [
+                { label: "다낭", sub: "베트남 · 골프 & 해양 스포츠", src: "/tlabal/다낭.jpg" },
+                { label: "세부", sub: "필리핀 · 다이빙 & 리조트", src: "/tlabal/세부.jpg" },
+                { label: "보홀", sub: "필리핀 · 에메랄드 바다", src: "/tlabal/보홀.jpg" },
+                { label: "나트랑 · 달랏", sub: "베트남 · 휴양 & 고원 도시", src: "/tlabal/나트랑/달랏.jpg" },
+                { label: "방콕 · 파타야", sub: "태국 · 도시 & 해변 리조트", src: "/tlabal/방콕_파타야.jpg" },
+                { label: "푸꾸옥", sub: "베트남 · 섬 리조트", src: "/tlabal/푸꾸옥.jpg" },
+                { label: "비엔티안 · 방비엥", sub: "라오스 · 자연 & 문화", src: "/tlabal/비엔티안_방비엥.jpg" },
+              ];
+              return destinations.map(({ label, sub, src }, i) => {
+                const isLastOdd = i === destinations.length - 1 && destinations.length % 2 !== 0;
+                return (
+                  <div
+                    key={label}
+                    className={`group overflow-hidden rounded-3xl border border-[#dbeafe] bg-[#f8faff] shadow-sm hover:shadow-md transition-shadow${isLastOdd ? " col-span-2 justify-self-center w-1/2 sm:col-span-3 sm:w-1/3 lg:col-span-1 lg:w-full lg:justify-self-auto" : ""}`}
+                  >
+                    <div className="relative h-52 w-full">
+                      <Image src={src} alt={label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
+                    </div>
+                    <div className="px-5 py-4">
+                      <p className="text-base font-extrabold text-[#0f2b5b]">{label}</p>
+                      <p className="mt-1 text-xs text-[#64748b]">{sub}</p>
+                    </div>
+                  </div>
+                );
+              });
+            })()}
           </div>
         </div>
       </section>
 
       {/* 05-b 상담 서비스 내용 — coverage-01 스타일 */}
-      <section data-animate className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
+      <section data-animate className="relative overflow-hidden bg-[#eff6ff] py-24 sm:py-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
         </div>
