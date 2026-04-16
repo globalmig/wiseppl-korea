@@ -68,16 +68,16 @@ export default function InquiriesList({ initial }: { initial: Inquiry[] }) {
 
   return (
     <div>
-      <p className="mb-6 text-sm text-[#64748b]">
+      <p className="mb-6 text-sm text-[#475569]">
         총 {inquiries.length}건
-        <span className="ml-2 inline-flex items-center gap-1 text-xs text-[#22c55e]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#22c55e] animate-pulse" />
+        <span className="ml-2 inline-flex items-center gap-1 text-xs text-[#166534]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a] animate-pulse" />
           실시간
         </span>
       </p>
 
       {inquiries.length === 0 ? (
-        <div className="rounded-2xl bg-white p-12 text-center text-[#94a3b8]">
+        <div className="rounded-2xl bg-white p-12 text-center text-text-muted">
           아직 문의가 없습니다.
         </div>
       ) : (
@@ -85,13 +85,13 @@ export default function InquiriesList({ initial }: { initial: Inquiry[] }) {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[#e2e8f0] bg-[#f8fafc]">
-                <th className="px-4 py-3 text-left font-semibold text-[#64748b]">이름</th>
-                <th className="px-4 py-3 text-left font-semibold text-[#64748b]">연락처</th>
-                <th className="px-4 py-3 text-left font-semibold text-[#64748b]">생년월일</th>
-                <th className="px-4 py-3 text-left font-semibold text-[#64748b]">지역</th>
-                <th className="px-4 py-3 text-left font-semibold text-[#64748b]">연령대</th>
-                <th className="px-4 py-3 text-left font-semibold text-[#64748b]">보험 상태</th>
-                <th className="px-4 py-3 text-left font-semibold text-[#64748b]">신청일시</th>
+                <th className="px-4 py-3 text-left font-semibold text-text-muted">이름</th>
+                <th className="px-4 py-3 text-left font-semibold text-text-muted">연락처</th>
+                <th className="px-4 py-3 text-left font-semibold text-text-muted">생년월일</th>
+                <th className="px-4 py-3 text-left font-semibold text-text-muted">지역</th>
+                <th className="px-4 py-3 text-left font-semibold text-text-muted">연령대</th>
+                <th className="px-4 py-3 text-left font-semibold text-text-muted">보험 상태</th>
+                <th className="px-4 py-3 text-left font-semibold text-text-muted">신청일시</th>
               </tr>
             </thead>
             <tbody>
@@ -119,7 +119,7 @@ export default function InquiriesList({ initial }: { initial: Inquiry[] }) {
                   <td className="px-4 py-3 text-[#475569]">
                     {item.insurance_status ? (insuranceLabel[item.insurance_status] ?? item.insurance_status) : "-"}
                   </td>
-                  <td className="px-4 py-3 text-[#94a3b8]">
+                  <td className="px-4 py-3 text-text-muted">
                     {new Date(item.created_at).toLocaleString("ko-KR", {
                       timeZone: "Asia/Seoul",
                       year: "numeric",
