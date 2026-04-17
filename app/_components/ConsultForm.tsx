@@ -2,6 +2,81 @@
 
 import { useState } from "react";
 
+function PrivacyModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-lg rounded-2xl bg-white shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between border-b border-[#e2e8f0] px-6 py-4">
+          <h2 className="text-base font-bold text-[#1e293b]">개인정보 수집 및 이용 동의</h2>
+          <button
+            onClick={onClose}
+            className="flex h-8 w-8 items-center justify-center rounded-full text-[#94a3b8] transition hover:bg-[#f1f5f9] hover:text-[#1e293b]"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="max-h-[60vh] overflow-y-auto px-6 py-5 text-sm text-[#334155] space-y-4">
+          <section>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">1. 수집하는 개인정보 항목</h3>
+            <p className="leading-relaxed text-[#64748b]">이름, 휴대폰 번호, 연령대, 보험 가입 현황</p>
+          </section>
+
+          <section>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">2. 개인정보의 수집 및 이용 목적</h3>
+            <ul className="list-disc list-inside space-y-1 text-[#64748b] leading-relaxed">
+              <li>무료 보장 분석 상담 진행</li>
+              <li>상담 일정 조율 및 결과 안내</li>
+              <li>고객 문의에 대한 답변</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">3. 개인정보의 보유 및 이용 기간</h3>
+            <p className="leading-relaxed text-[#64748b]">
+              상담 완료 후 <strong className="text-[#1e293b]">3개월</strong> 보관 후 파기합니다.
+              단, 관계 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">4. 개인정보의 제3자 제공</h3>
+            <p className="leading-relaxed text-[#64748b]">
+              수집된 개인정보는 상담 목적 외 제3자에게 제공되지 않습니다.
+              단, 법령에 의한 경우는 예외로 합니다.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">5. 동의 거부 권리 및 불이익</h3>
+            <p className="leading-relaxed text-[#64748b]">
+              개인정보 수집 및 이용에 동의하지 않으실 수 있으나,
+              동의를 거부하실 경우 무료 보장 분석 서비스 이용이 제한될 수 있습니다.
+            </p>
+          </section>
+        </div>
+
+        <div className="border-t border-[#e2e8f0] px-6 py-4">
+          <button
+            onClick={onClose}
+            className="w-full rounded-xl bg-[#1a56db] py-3 text-sm font-bold text-white transition hover:bg-[#1e40af]"
+          >
+            확인
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface FormData {
   name: string;
   phone: string;
@@ -33,6 +108,7 @@ export default function ConsultForm({ variant = "hero" }: ConsultFormProps) {
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   const validate = () => {
     const nextErrors: FormErrors = {};
@@ -200,12 +276,21 @@ export default function ConsultForm({ variant = "hero" }: ConsultFormProps) {
           </div>
         </div>
 
+        {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
+
         <div className={`rounded-lg border p-3 ${errors.agree ? "border-red-300 bg-red-50" : "border-[#e2e8f0] bg-[#f8fafc]"}`}>
           <label className="flex cursor-pointer items-start gap-2">
             <input type="checkbox" name="agree" checked={form.agree} onChange={handleChange} className="mt-0.5 h-4 w-4 rounded" />
             <span className="text-xs leading-relaxed text-[#64748b]">
-              <strong className="text-[#1e293b]">개인정보 수집 및 이용에 동의합니다.</strong>
-              수집 항목은 이름, 연락처이며 상담 진행 목적 외에는 사용하지 않습니다.
+              <strong className="text-[#1e293b]">개인정보 수집 및 이용에 동의합니다.</strong>{" "}
+              수집 항목은 이름, 연락처이며 상담 진행 목적 외에는 사용하지 않습니다.{" "}
+              <button
+                type="button"
+                onClick={() => setShowPrivacy(true)}
+                className="font-medium text-[#1a56db] underline underline-offset-2"
+              >
+                자세히 보기
+              </button>
             </span>
           </label>
           {errors.agree && <p className="mt-1.5 ml-6 text-xs text-red-500">{errors.agree}</p>}
