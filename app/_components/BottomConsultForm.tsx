@@ -66,6 +66,12 @@ interface FormErrors {
   agree?: string;
 }
 
+const InputIcon = ({ d }: { d: string }) => (
+  <svg className="h-4 w-4 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+    <path strokeLinecap="round" strokeLinejoin="round" d={d} />
+  </svg>
+);
+
 export default function BottomConsultForm() {
   const [form, setForm] = useState<FormData>({ name: "", phone: "", birthdate: "", region: "", agree: false });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -92,7 +98,6 @@ export default function BottomConsultForm() {
       setErrors(next);
       return;
     }
-
     setLoading(true);
     try {
       const res = await fetch("/api/inquiries", {
@@ -121,7 +126,7 @@ export default function BottomConsultForm() {
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center py-10 text-center">
-        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#ecfdf5]">
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#ecfdf5] shadow-sm">
           <svg className="h-8 w-8 text-[#059669]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
@@ -135,96 +140,147 @@ export default function BottomConsultForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="mt-8 grid gap-4">
-      <label className="block">
-        <span className="mb-2 block text-sm font-semibold text-[#334155]">
-          이름 <span className="text-[#e85d04]">*</span>
-        </span>
-        <input
-          type="text"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          placeholder="이름을 입력해 주세요"
-          className={`w-full rounded-2xl border bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:ring-2 focus:ring-[#bfdbfe] ${
-            errors.name ? "border-red-400 bg-red-50" : "border-[#dbeafe] focus:border-[#1a56db]"
-          }`}
-        />
-        {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
-      </label>
-
-      <label className="block">
-        <span className="mb-2 block text-sm font-semibold text-[#334155]">
-          연락처 <span className="text-[#e85d04]">*</span>
-        </span>
-        <input
-          type="tel"
-          name="phone"
-          value={form.phone}
-          onChange={handleChange}
-          placeholder="연락처를 입력해 주세요"
-          className={`w-full rounded-2xl border bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:ring-2 focus:ring-[#bfdbfe] ${
-            errors.phone ? "border-red-400 bg-red-50" : "border-[#dbeafe] focus:border-[#1a56db]"
-          }`}
-        />
-        {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
-      </label>
-
-      <label className="block">
-        <span className="mb-2 block text-sm font-semibold text-[#334155]">생년월일</span>
-        <input
-          type="date"
-          name="birthdate"
-          value={form.birthdate}
-          onChange={handleChange}
-          className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
-        />
-      </label>
-
-      <label className="block">
-        <span className="mb-2 block text-sm font-semibold text-[#334155]">지역/주소</span>
-        <input
-          type="text"
-          name="region"
-          value={form.region}
-          onChange={handleChange}
-          placeholder="거주 지역을 입력해 주세요 (예: 서울 강남구)"
-          className="w-full rounded-2xl border border-[#dbeafe] bg-[#f8faff] px-4 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:ring-2 focus:ring-[#bfdbfe]"
-        />
-      </label>
-
-      {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
-
-      <div className={`rounded-lg border p-3 ${errors.agree ? "border-red-300 bg-red-50" : "border-[#e2e8f0] bg-[#f8fafc]"}`}>
-        <label className="flex cursor-pointer items-center gap-2">
-          <input type="checkbox" name="agree" checked={form.agree} onChange={handleChange} className="mt-0.5 h-4 w-4 rounded" />
-          <div className="text-xs leading-relaxed text-[#64748b] flex justify-between items-center w-full">
-            <strong className="text-[#1e293b]">개인정보 수집 및 이용에 동의합니다.</strong>
-            <button type="button" onClick={() => setShowPrivacy(true)} className="font-medium text-lg text-[#5b5d63]">
-              {">"}
-            </button>
-          </div>
-        </label>
-        {errors.agree && <p className="mt-1.5 ml-6 text-xs text-red-500">{errors.agree}</p>}
+    <>
+      <div className="mb-7">
+        <h3 className="text-xl font-extrabold text-[#0f2b5b]">상담 신청서</h3>
+        <p className="mt-1 text-sm text-[#94a3b8]">아래 정보를 입력하시면 전문가가 연락드립니다</p>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="btn-accent inline-flex items-center justify-center rounded-2xl px-6 py-4 mt-5 text-base font-bold text-white shadow-lg shadow-[#1a56db]/25 transition hover:shadow-[#1a56db]/40 disabled:opacity-70"
-      >
-        {loading ? (
-          <span className="flex items-center gap-2">
-            <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-            </svg>
-            접수 중...
+      <form onSubmit={handleSubmit} noValidate className="grid gap-4">
+        {/* 이름 */}
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-semibold text-[#334155]">
+            이름 <span className="text-[#e85d04]">*</span>
           </span>
-        ) : (
-          "보험 전문 점검 무료 상담 신청"
-        )}
-      </button>
-    </form>
+          <div className="relative">
+            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2">
+              <InputIcon d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </span>
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="이름을 입력해 주세요"
+              className={`w-full rounded-xl border pl-10 pr-4 py-3 text-sm text-[#0f172a] outline-none transition focus:ring-2 focus:ring-[#bfdbfe] ${
+                errors.name ? "border-red-400 bg-red-50" : "border-[#e2e8f0] bg-[#f8fafc] focus:border-[#1a56db] focus:bg-white"
+              }`}
+            />
+          </div>
+          {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+        </label>
+
+        {/* 연락처 */}
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-semibold text-[#334155]">
+            연락처 <span className="text-[#e85d04]">*</span>
+          </span>
+          <div className="relative">
+            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2">
+              <InputIcon d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+            </span>
+            <input
+              type="tel"
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+              placeholder="010-0000-0000"
+              className={`w-full rounded-xl border pl-10 pr-4 py-3 text-sm text-[#0f172a] outline-none transition focus:ring-2 focus:ring-[#bfdbfe] ${
+                errors.phone ? "border-red-400 bg-red-50" : "border-[#e2e8f0] bg-[#f8fafc] focus:border-[#1a56db] focus:bg-white"
+              }`}
+            />
+          </div>
+          {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
+        </label>
+
+        {/* 생년월일 + 지역 (2열) */}
+        <div className="grid grid-cols-2 gap-3">
+          <label className="block">
+            <span className="mb-1.5 block text-sm font-semibold text-[#334155]">생년월일</span>
+            <div className="relative">
+              <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2">
+                <InputIcon d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+              </span>
+              <input
+                type="date"
+                name="birthdate"
+                value={form.birthdate}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-[#e2e8f0] bg-[#f8fafc] pl-10 pr-3 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:bg-white focus:ring-2 focus:ring-[#bfdbfe]"
+              />
+            </div>
+          </label>
+
+          <label className="block">
+            <span className="mb-1.5 block text-sm font-semibold text-[#334155]">지역</span>
+            <div className="relative">
+              <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2">
+                <InputIcon d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+              </span>
+              <input
+                type="text"
+                name="region"
+                value={form.region}
+                onChange={handleChange}
+                placeholder="서울 강남구"
+                className="w-full rounded-xl border border-[#e2e8f0] bg-[#f8fafc] pl-10 pr-3 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:bg-white focus:ring-2 focus:ring-[#bfdbfe]"
+              />
+            </div>
+          </label>
+        </div>
+
+        {/* 개인정보 동의 */}
+        {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
+        <div className={`rounded-xl border p-4 transition-colors ${errors.agree ? "border-red-300 bg-red-50" : "border-[#e2e8f0] bg-[#f8fafc]"}`}>
+          <div className="flex items-center justify-between">
+            <label className="flex cursor-pointer items-center gap-2.5">
+              <input
+                type="checkbox"
+                name="agree"
+                checked={form.agree}
+                onChange={handleChange}
+                className="h-4 w-4 rounded accent-[#1a56db]"
+              />
+              <span className="text-xs font-semibold text-[#1e293b]">개인정보 수집 및 이용에 동의합니다.</span>
+            </label>
+            <button
+              type="button"
+              onClick={() => setShowPrivacy(true)}
+              className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-[#1a56db] transition hover:bg-[#dbeafe]"
+            >
+              내용 보기
+              <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+          </div>
+          {errors.agree && <p className="mt-1.5 ml-6 text-xs text-red-500">{errors.agree}</p>}
+        </div>
+
+        {/* 제출 버튼 */}
+        <button
+          type="submit"
+          disabled={loading}
+          className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#1a56db] px-6 py-4 text-base font-bold text-white shadow-lg shadow-[#1a56db]/25 transition hover:bg-[#1648c0] hover:shadow-[#1a56db]/40 disabled:opacity-70"
+        >
+          {loading ? (
+            <>
+              <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+              </svg>
+              접수 중...
+            </>
+          ) : (
+            <>
+              무료 보장 분석 상담 신청
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </>
+          )}
+        </button>
+      </form>
+    </>
   );
 }

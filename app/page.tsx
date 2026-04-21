@@ -142,7 +142,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <section id="section-coverage" data-animate className="relative scroll-mt-16 overflow-hidden h-[calc(100vh-4rem)] flex flex-col bg-white">
+      <section id="section-coverage" data-animate className="relative  scroll-mt-16 overflow-hidden h-[calc(100vh-4rem)] flex flex-col bg-white">
         {/* background blobs */}
         <div className="pointer-events-none absolute inset-0 -z-0">
           <div className="absolute -top-32 -right-32 h-[520px] w-[520px] rounded-full bg-[#dbeafe] opacity-50 blur-[96px]" />
@@ -592,7 +592,13 @@ export default function Home() {
                     className={`group overflow-hidden rounded-3xl border border-[#dbeafe] bg-[#f8faff] shadow-sm hover:shadow-md transition-shadow${isLastOdd ? " col-span-2 justify-self-center w-1/2 sm:col-span-3 sm:w-1/3 lg:col-span-1 lg:w-full lg:justify-self-auto" : ""}`}
                   >
                     <div className="relative h-52 w-full">
-                      <Image src={src} alt={label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
+                      <Image
+                        src={src}
+                        alt={label}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      />
                     </div>
                     <div className="px-5 py-4">
                       <p className="text-base font-extrabold text-[#0f2b5b]">{label}</p>

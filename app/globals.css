@@ -25,6 +25,13 @@
   --foreground: #1e293b;
 }
 
+img.twemoji {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  vertical-align: -0.1em;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -143,6 +150,26 @@ input[type="checkbox"] {
   background: linear-gradient(135deg, #1239a0 0%, #0e2d7a 100%);
   transform: translateY(-1px);
   box-shadow: 0 8px 20px rgba(26, 86, 219, 0.35);
+}
+
+/* 시계 울림 애니메이션 */
+@keyframes ring {
+  0%, 100% { transform: rotate(0deg); }
+  10%       { transform: rotate(-20deg); }
+  20%       { transform: rotate(20deg); }
+  30%       { transform: rotate(-16deg); }
+  40%       { transform: rotate(16deg); }
+  50%       { transform: rotate(-10deg); }
+  60%       { transform: rotate(10deg); }
+  70%       { transform: rotate(-4deg); }
+  80%       { transform: rotate(4deg); }
+  90%       { transform: rotate(0deg); }
+}
+
+.animate-ring {
+  display: inline-block;
+  animation: ring 1.2s ease-in-out infinite;
+  transform-origin: top center;
 }
 
 /* 말풍선 플로팅 애니메이션 */
