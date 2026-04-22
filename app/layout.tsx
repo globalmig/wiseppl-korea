@@ -54,8 +54,7 @@ export const metadata: Metadata = {
     images: ["/seo.png"],
   },
   verification: {
-    // 네이버 서치어드바이저 소유확인 코드를 여기에 입력하세요
-    // https://searchadvisor.naver.com → 사이트 등록 → HTML 태그 방식의 content 값
+    google: "f5245563b6d1bb4a",
     other: {
       "naver-site-verification": "68bdee749220fee56a659fa0ea452ace91045629",
     },
