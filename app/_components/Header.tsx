@@ -10,11 +10,11 @@ const NAV = [
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(() => typeof window !== "undefined" && window.scrollY > 0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 0);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);

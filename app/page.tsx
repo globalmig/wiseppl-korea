@@ -1,912 +1,816 @@
 import Image from "next/image";
-import ConsultForm from "./_components/ConsultForm";
+import BottomConsultForm from "./_components/BottomConsultForm";
 import FAQAccordion from "./_components/FAQAccordion";
-import HeaderCTAButton from "./_components/HeaderCTAButton";
 import ScrollToTopButton from "./_components/ScrollToTopButton";
 import ScrollAnimations from "./_components/ScrollAnimations";
-import BottomConsultForm from "./_components/BottomConsultForm";
+import BenefitCardList from "./_components/BenefitCardList";
+import AnalysisCardGrid from "./_components/AnalysisCardGrid";
+import TwemojiWrapper from "./_components/TwemojiWrapper";
+import BenefitStepCards from "./_components/BenefitStepCards";
+import CancerFeatureCards from "./_components/CancerFeatureCards";
 import Header from "./_components/Header";
+import SlowVideoBg from "./_components/SlowVideoBg";
+import Link from "next/link";
 
-const keyMessages = ["나만의 보장 분석 전문가에게 보험 상담", "무료 상담 제공", "맞춤형 보험 점검 서비스"];
-
-const benefits = ["원하는 날짜·시간 상담 가능", "복잡한 보험 정밀 분석", "상세 리포트 제공", "가입 권유 없는 무료 상담", "가족 보험 통합 관리 가능"];
-
-const reasons = [
-  "보험 나이 상승으로 보험료가 평균 5~10% 인상될 수 있습니다.",
-  "상담을 미룰수록 같은 조건에서도 보험료가 불리해질 수 있습니다.",
-  "지금 점검하면 현재 상황에 맞는 최적 보험 구성을 확인할 수 있습니다.",
-];
-
-const effects = ["중복 보장 정리", "부족한 보장 강화", "라이프스타일 맞춤 리모델링"];
-
-const travelSections = [
-  {
-    eyebrow: "05-a. 메인 메시지",
-    title: "보험 점검 받고 동남아 여행 기회",
-    description: "보험 점검 상담을 받으면서 여행 이벤트까지 함께 안내받을 수 있는 핵심 메시지입니다.",
-    items: ["보험 점검 받고 동남아 여행 기회", "보장 분석 전문가 상담"],
-    variant: "light",
-  },
-  {
-    eyebrow: "05-b. 상담 서비스 내용",
-    title: "상담에서 확인할 수 있는 핵심 서비스",
-    description: "여행 이벤트와 별개로 실제 상담에서 제공되는 서비스 내용을 항목별로 정리했습니다.",
-    items: ["보험 리모델링 상담", "상세 보장 분석 리포트", "가족 보험 통합 점검"],
-    variant: "accent",
-  },
-  {
-    eyebrow: "05-c. 보험 나이 안내",
-    title: "보험료 변화 전 미리 확인해야 할 포인트",
-    description: "보험 나이와 보험료 변동 시점을 미리 알고 점검을 서두를 필요가 있는 이유를 안내합니다.",
-    items: ["보험 나이는 6개월마다 상승", "보험료 평균 5~10% 증가"],
-    variant: "light",
-  },
-  {
-    eyebrow: "05-d. 이벤트 혜택",
-    title: "상담 완료 고객 대상 여행 이벤트",
-    description: "상담을 마친 고객이 참여할 수 있는 이벤트 혜택을 명확하게 보여주는 섹션입니다.",
-    items: ["상담 완료 고객 전원 응모", "동남아 3박5일 풀패키지 여행권 증정"],
-    variant: "accent",
-  },
-  {
-    eyebrow: "05-e. FAQ 핵심",
-    title: "상담 전 자주 묻는 핵심 안내",
-    description: "상담 전 부담을 줄일 수 있도록 가장 많이 확인하는 내용을 먼저 정리했습니다.",
-    items: ["보험 강요 없음", "기존 보험 객관적 분석", "가족 보험 동시 점검 가능", "비대면 상담 가능"],
-    variant: "light",
-  },
-] as const;
-
-const travelInfoSections = travelSections.slice(1);
-
-const cancerSections = [
-  {
-    eyebrow: "06-a. 메인 메시지",
-    title: "암보험 무료 전문가 상담",
-    description: "암 치료비와 전이암 보장까지 한 번에 점검하고, 월 부담을 고려한 설계 가능성을 함께 확인하는 히어로 메시지입니다.",
-    items: ["암보험 무료 전문가 상담", "암 치료·전이암 보장 점검", "월 1만원대 보장 설계 가능"],
-    variant: "light",
-  },
-  {
-    eyebrow: "06-b. 핵심 가치",
-    title: "암보험 상담에서 확인하는 핵심 분석 가치",
-    description: "단순 상품 안내가 아니라 현재 보장을 기준으로 치료비와 전이암 대응까지 구체적으로 점검합니다.",
-    items: ["암 치료비 대비 보장 분석", "전이암까지 보장 설계", "부족한 보장 스마트 분석", "30초 보장 진단"],
-    variant: "accent",
-  },
-  {
-    eyebrow: "06-c. 기대 효과",
-    title: "점검 이후 기대할 수 있는 실질적 변화",
-    description: "불필요한 구성을 덜고 필요한 보장을 강화해 보험료와 보장 구조를 함께 정리하는 데 초점을 둡니다.",
-    items: ["보험료 평균 5~10% 절감 가능", "불필요 보험 정리", "필요한 보장만 강화"],
-    variant: "light",
-  },
-  {
-    eyebrow: "06-d. 이벤트",
-    title: "상담 고객 대상 여행 이벤트",
-    description: "상담 고객 전원을 대상으로 제공되는 여행권 이벤트 혜택을 명확하게 보여주는 섹션입니다.",
-    items: ["상담 고객 전원", "동남아 3박5일 여행권 증정", "리조트 숙박 + 액티비티 + 차량 지원"],
-    variant: "accent",
-  },
-  {
-    eyebrow: "06-e. FAQ",
-    title: "상담 전 꼭 확인하는 안내 사항",
-    description: "가입 강요 여부, 가족 보험 점검, 상담 방식과 이벤트 운영 방식까지 자주 묻는 내용을 정리했습니다.",
-    items: ["보험 신규 가입 강요 없음", "가족 보험 통합 점검 가능", "전문가 상담 방식 진행", "공정 추첨 방식 이벤트"],
-    variant: "light",
-  },
-] as const;
-
-const cancerInfoSections = cancerSections.slice(1);
-
-function CheckList({ items }: { items: string[] }) {
+export default function Page() {
   return (
-    <ul className="space-y-3">
-      {items.map((item) => (
-        <li key={item} className="flex items-start gap-3 text-sm sm:text-base text-[#1e293b]">
-          <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#dbeafe] text-[#1a56db]">
-            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-          </span>
-          <span className="leading-relaxed">{item}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function InfoSection({ eyebrow, title, description, items, variant = "light" }: { eyebrow: string; title: string; description?: string; items: string[]; variant?: "light" | "accent" }) {
-  const isAccent = variant === "accent";
-
-  return (
-    <section data-animate className={isAccent ? "bg-[#eff6ff] py-16 sm:py-20" : "bg-white py-16 sm:py-20"}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
-            <span className={`inline-flex rounded-full px-4 py-1.5 text-sm font-bold ${isAccent ? "bg-white text-[#1a56db]" : "bg-[#eff6ff] text-[#1a56db]"}`}>{eyebrow}</span>
-            <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold leading-tight text-[#0f2b5b]">{title}</h2>
-            {description ? <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#64748b]">{description}</p> : null}
-          </div>
-          <div className="rounded-3xl border border-[#dbeafe] bg-white p-6 sm:p-8 shadow-sm">
-            <CheckList items={items} />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export default function Home() {
-  return (
-    <div className="min-h-screen bg-white">
-      <Header />
-
-      <section id="section-coverage" data-animate className="relative  scroll-mt-16 overflow-hidden h-[calc(100vh-4rem)] flex flex-col bg-white">
-        {/* background blobs */}
-        <div className="pointer-events-none absolute inset-0 -z-0">
-          <div className="absolute -top-32 -right-32 h-[520px] w-[520px] rounded-full bg-[#dbeafe] opacity-50 blur-[96px]" />
-          <div className="absolute top-1/2 -left-24 h-[360px] w-[360px] rounded-full bg-[#bfdbfe] opacity-30 blur-[80px]" />
-        </div>
-
-        <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 flex-1 min-h-0 flex flex-col py-4 sm:py-6 lg:py-8">
-          {/* eyebrow */}
-          <div className="flex justify-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#bfdbfe] bg-[#eff6ff] px-4 py-1.5 text-sm font-semibold text-[#1a56db]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a56db] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1a56db]" />
-              </span>
-              보장 분석 전문 무료 상담
-            </span>
-          </div>
-
-          {/* headline */}
-          <div className="mt-3 text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-[1.1] tracking-tight text-[#0f172a]">
-              내 보험, 제대로
-              <br />
-              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">분석받으세요</span>
-            </h1>
-            <p className="mt-5 mx-auto max-w-xl text-base sm:text-lg leading-relaxed text-[#64748b]">
-              복잡한 보험을 한 번에 점검하고 필요한 보장만 남기는
-              <br className="hidden sm:block" /> 전문가 무료 상담 서비스입니다.
-            </p>
-          </div>
-
-          {/* CTA row */}
-          <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href="#consult-form"
-              className="inline-flex h-14 items-center justify-center rounded-2xl bg-[#1a56db] px-8 text-base font-bold text-white shadow-lg shadow-[#1a56db]/30 transition hover:bg-[#1648c0]"
-            >
-              무료 상담 신청
-            </a>
-            <a
-              href="#section-travel"
-              className="inline-flex h-14 items-center justify-center rounded-2xl border border-[#cbd5e1] bg-white px-8 text-base font-semibold text-[#334155] transition hover:border-[#1a56db] hover:text-[#1a56db]"
-            >
-              이벤트 확인하기
-            </a>
-          </div>
-          {/* main hero image + floating cards */}
-          <div className="main_hero_img relative mx-auto mt-5 flex justify-center flex-1 min-h-0 items-end w-full">
-            {/* left floating card — 보험료 절감 */}
-            <div className="absolute left-0 top-1/4 hidden lg:block animate-float z-10">
-              <div className="relative w-44 text-center rounded-2xl border border-[#dbeafe] bg-white p-6 shadow-xl">
-                {/* <Image src="/hero/hero_money.jpg" alt="보험료 절감" width={160} height={80} className="w-full h-20 rounded-xl object-cover mb-3" /> */}
-                <p className="text-md font-extrabold text-[#1648c0]">보험료 절감</p>
-                <p className="mt-1 text-sm text-[#64748b] leading-relaxed">
-                  중복 보장 정리로
-                  <br />
-                  <strong> 평균 5~10% 절감 </strong>
-                </p>
-                {/* 말풍선 꼬리 (오른쪽) */}
-                <span className="absolute -right-2.5 top-1/2 -translate-y-1/2 h-5 w-5 rotate-45 border-r border-t border-[#dbeafe] bg-white" />
-              </div>
-              {/* 말풍선 점들 */}
-              <div className="mt-2 flex justify-end gap-1.5 pr-1">
-                <span className="h-2 w-2 rounded-full bg-[#bfdbfe]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#93c5fd]" />
-                <span className="h-1 w-1 rounded-full bg-[#60a5fa]" />
-              </div>
-            </div>
-
-            <div className="w-full sm:max-w-[70%] md:max-w-[55%] lg:max-w-[40%] flex items-end">
-              <Image
-                src="/hero/hero_thinking.png"
-                alt="보험 전문가 상담"
-                width={720}
-                height={460}
-                priority
-                className="w-full h-auto max-h-[32vh] sm:max-h-[42vh] object-contain object-bottom mix-blend-multiply"
+    <TwemojiWrapper>
+      <div className="min-h-screen bg-[#0a1628]">
+        <Header />
+        {/* HERO */}
+        <section className="relative overflow-hidden min-h-screen flex flex-col justify-between" style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d2045 40%, #0a1e3d 70%, #071428 100%)" }}>
+          {/* 별빛 배경 */}
+          <div className="pointer-events-none absolute inset-0 z-0">
+            {[...Array(40)].map((_, i) => (
+              <span
+                key={i}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: i % 5 === 0 ? "3px" : "2px",
+                  height: i % 5 === 0 ? "3px" : "2px",
+                  opacity: 0.2 + (i % 4) * 0.12,
+                  top: `${(i * 37 + 11) % 90}%`,
+                  left: `${(i * 53 + 7) % 95}%`,
+                }}
               />
-            </div>
+            ))}
+            <div className="absolute top-1/3 right-1/4 h-[400px] w-[400px] rounded-full bg-[#1a56db] opacity-10 blur-[120px]" />
+            <div className="absolute bottom-1/4 left-1/4 h-[300px] w-[300px] rounded-full bg-[#3b82f6] opacity-8 blur-[100px]" />
+          </div>
 
-            {/* right floating card — 상세 리포트 */}
-            <div className="absolute right-0 top-1/4 hidden lg:block animate-float-alt z-10">
-              <div className="relative w-44 text-center rounded-2xl border border-[#dbeafe] bg-white p-6 shadow-xl">
-                {/* <Image src="/hero/hero_contract.jpg" alt="상세 리포트" width={160} height={80} className="w-full h-20 rounded-xl object-cover mb-3" /> */}
-                <p className="text-md font-extrabold text-[#1648c0]">상세 리포트</p>
-                <p className="mt-1 text-sm text-[#64748b] leading-relaxed">
-                  맞춤 보장 분석
-                  <br />
-                  <strong className="">리포트 무료 제공</strong>
-                </p>
-                {/* 말풍선 꼬리 (왼쪽) */}
-                <span className="absolute -left-2.5 top-1/2 -translate-y-1/2 h-5 w-5 rotate-45 border-l border-b border-[#dbeafe] bg-white" />
-              </div>
-              {/* 말풍선 점들 */}
-              <div className="mt-2 flex justify-start gap-1.5 pl-1">
-                <span className="h-1 w-1 rounded-full bg-[#60a5fa]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#93c5fd]" />
-                <span className="h-2 w-2 rounded-full bg-[#bfdbfe]" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* mobile cards (lg 미만) */}
-      <div className="grid grid-cols-2 gap-3 lg:hidden px-4 py-4 bg-white">
-        <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md flex gap-3 items-start">
-          <Image src="/hero/hero_money.jpg" alt="보험료 절감" width={44} height={44} className="h-11 w-11 rounded-xl object-cover flex-shrink-0" />
-          <div>
-            <p className="text-sm font-extrabold text-[#0f2b5b]">보험료 절감</p>
-            <p className="mt-0.5 text-xs text-[#64748b] leading-snug">중복 보장 정리로 평균 5~10% 절감</p>
-          </div>
-        </div>
-        <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md flex gap-3 items-start">
-          <Image src="/hero/hero_contract.jpg" alt="상세 리포트" width={44} height={44} className="h-11 w-11 rounded-xl object-cover flex-shrink-0" />
-          <div>
-            <p className="text-sm font-extrabold text-[#0f2b5b]">상세 리포트</p>
-            <p className="mt-0.5 text-xs text-[#64748b] leading-snug">맞춤 보장 분석 리포트 무료 제공</p>
-          </div>
-        </div>
-      </div>
-
-      {/* bottom stats bar */}
-      <div className="relative z-10 border-t border-[#e2e8f0] bg-[#f8fafc]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 grid grid-cols-3 divide-x divide-[#e2e8f0]">
-          {[
-            { value: "무료", label: "상담 비용" },
-            { value: "상세", label: "보장 분석 리포트" },
-            { value: "가족", label: "통합 점검 가능" },
-          ].map(({ value, label }) => (
-            <div key={label} className="flex flex-col items-center gap-0.5 px-4 text-center">
-              <span className="text-2xl font-extrabold text-[#1a56db]">{value}</span>
-              <span className="text-xs text-[#64748b]">{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <section data-animate className="coverage-01 relative overflow-hidden bg-white py-16 sm:py-20">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#dbeafe] opacity-40 blur-[80px]" />
-        </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          {/* eyebrow */}
-          <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-            <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">01</span>
-              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">주요 내용</span>
-            </div>
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-          </div>
-          {/* headline */}
-          <div className="mt-6 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
-              나만의 보장 분석 전문가에게
-              <br />
-              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">받는 보험 상담</span>
-            </h2>
-            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">
-              보험을 새로 가입시키기보다 지금 가지고 있는 보장을 먼저 점검하고,
-              <br className="hidden sm:block" /> 필요한 부분을 이해하기 쉽게 설명하는 상담 흐름입니다.
-            </p>
-          </div>
-          {/* feature cards */}
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {[
-              { src: "/icon/call.jpg", alt: "보장 분석 전문가", label: keyMessages[0] },
-              { src: "/icon/free.jpg", alt: "무료 상담", label: keyMessages[1] },
-              { src: "/icon/partner.jpg", alt: "맞춤 점검 서비스", label: keyMessages[2] },
-            ].map(({ src, alt, label }, i) => (
-              <div key={i} className="flex flex-col items-center gap-4 rounded-3xl border border-[#dbeafe] bg-white px-6 py-8 text-center shadow-sm hover:shadow-md transition-shadow">
-                <span className="flex h-24 w-32 items-center justify-center rounded-2xl overflow-hidden">
-                  <Image src={src} alt={alt} width={120} height={80} className="h-full w-full object-contain" />
+          <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 pt-28 pb-0 flex-1 flex flex-col">
+            {/* eyebrow */}
+            <div className="flex justify-center mb-6">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#60a5fa] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#60a5fa]" />
                 </span>
-                <p className="text-sm font-bold leading-snug text-[#0f2b5b]">{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section data-animate className="coverage-02 relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
-        </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          {/* eyebrow */}
-          <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-            <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">02</span>
-              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">주요 혜택</span>
-            </div>
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-          </div>
-          {/* headline */}
-          <div className="mt-6 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
-              복잡한 보험도
-              <br />
-              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">한 번에 해결</span>
-            </h2>
-            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">
-              상담 예약의 편의성과 분석 품질, 부담 없는 상담 방식까지
-              <br className="hidden sm:block" /> 실제 이용 과정에서 체감하는 장점을 정리했습니다.
-            </p>
-          </div>
-          {/* benefits list */}
-          <div className="mt-10 mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5">
-            {benefits.map((item, i) => (
-              <div
-                key={item}
-                className={`flex items-center gap-4 rounded-2xl border border-[#dbeafe] bg-white px-10 py-8 md:py-10 shadow-sm${benefits.length % 2 !== 0 && i === benefits.length - 1 ? " sm:col-span-2" : ""}`}
-              >
-                <span className="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">{String(i + 1).padStart(2, "0")}</span>
-                <p className="text-xl font-semibold text-[#1e293b] leading-snug">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <InfoSection
-        eyebrow="03. 보험 상담 필요성"
-        title="상담을 미룰수록 보험료 조건은 더 불리해질 수 있습니다"
-        description="보험료는 나이와 시점의 영향을 받기 때문에, 늦추기보다 현재 조건에서 먼저 점검하는 편이 유리할 수 있습니다."
-        items={reasons}
-      />
-
-      <InfoSection
-        eyebrow="04. 상담 효과"
-        title="상담 이후에는 보장 구조를 더 선명하게 정리할 수 있습니다"
-        description="보장 분석 상담은 단순 설명이 아니라 현재 보험을 재정비하는 출발점이 됩니다."
-        items={effects}
-        variant="accent"
-      />
-
-      {/* <section id="consult-form" className="hero-gradient scroll-mt-24 py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white">
-                무료 보장 분석 신청
+                와이즈피플코리아 보험 전문 상담
               </span>
-              <h2 className="mt-5 text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-white">
-                현재 보험을 먼저 점검하고
+            </div>
+
+            {/* headline */}
+            <div className="text-center">
+              <h1 className="text-4xl sm:text-5xl lg:text-[60px] font-extrabold leading-[1.1] tracking-tight text-white">
+                내 보험, 제대로
                 <br />
-                필요한 보장만 남기세요
-              </h2>
-              <p className="mt-4 text-sm sm:text-base leading-relaxed text-white/80">
-                가입 권유 없이 현재 보험 상태를 분석하고, 필요한 보장과 중복 보장을 구분해 드립니다.
+                <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">보장받고 계신가요?</span>
+              </h1>
+              <p className="mt-5 mx-auto max-w-md text-sm sm:text-base leading-relaxed text-white/70">
+                지금 바로 보장 분석을 받아보세요.
+                <br />
+                상담만 받아도 여행 이벤트 참여 기회가 주어집니다.
               </p>
-              <div className="mt-8 space-y-3">
-                {[
-                  "원하는 시간 상담 가능",
-                  "상세 리포트 제공",
-                  "무료 상담 진행",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-white">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#059669]">
-                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </span>
-                    <span className="font-medium">{item}</span>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                href="#consult-form"
+                className="inline-flex h-13 items-center justify-center rounded-2xl bg-[#1a56db] px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-[#1a56db]/40 transition hover:bg-[#1648c0]"
+              >
+                지금 상담하기 →
+              </Link>
+              <Link
+                href="#benefit-analysis"
+                className="inline-flex h-13 items-center justify-center rounded-2xl border border-white/25 bg-white/8 px-8 py-3.5 text-base font-semibold text-white/90 backdrop-blur-sm transition hover:bg-white/15"
+              >
+                보장분석 알아보기 ›
+              </Link>
+            </div>
+
+            {/* 캐릭터 + 플로팅 카드 */}
+            <div className="relative mx-auto mt-10 w-full flex justify-center flex-1 min-h-[320px]">
+              {/* 왼쪽 상단 — 집 아이콘 카드 */}
+              <div className="absolute left-4 top-0 hidden md:block animate-float z-10">
+                <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 shadow-xl backdrop-blur-md">
+                  <span className="text-3xl">🏠</span>
+                  <div>
+                    <p className="text-xs font-bold text-white">내 집 보장</p>
+                    <p className="text-xs text-white/60">화재·재물 분석</p>
                   </div>
-                ))}
+                </div>
+              </div>
+
+              {/* 오른쪽 상단 — 방패 카드 */}
+              <div className="absolute right-4 top-4 hidden md:block animate-float-alt z-10">
+                <div className="rounded-2xl border border-[#1a56db]/40 bg-[#1a56db]/20 px-5 py-3 shadow-xl backdrop-blur-md text-center">
+                  <p className="text-xs font-bold text-[#93c5fd]">보장 분석 완료</p>
+                  <p className="text-sm font-extrabold text-white mt-0.5">최적 플랜 발견!</p>
+                  <span className="inline-block mt-1 text-lg">🛡</span>
+                </div>
+              </div>
+
+              {/* 왼쪽 하단 — 여행권 카드 */}
+              <div className="absolute left-4 bottom-16 hidden md:block animate-float z-10" style={{ animationDelay: "0.5s" }}>
+                <div className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 shadow-xl backdrop-blur-md">
+                  <p className="text-[10px] font-semibold text-white/60 mb-0.5">이벤트 당첨</p>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">✈️</span>
+                    <p className="text-xs font-extrabold text-white">여행권 증정 🎁</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 오른쪽 중단 — 달러 카드 */}
+              <div className="absolute right-4 bottom-20 hidden md:block animate-float-alt z-10" style={{ animationDelay: "1s" }}>
+                <div className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 shadow-xl backdrop-blur-md">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">💵</span>
+                    <div>
+                      <p className="text-xs font-bold text-white">보험료 절감</p>
+                      <p className="text-[10px] text-white/60">평균 5~10%↓</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 말풍선 */}
+              {/* <div className="absolute right-[18%] top-8 hidden lg:block z-10">
+                <div className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 backdrop-blur-md">
+                  <div className="flex gap-1">
+                    <span className="h-2 w-2 rounded-full bg-white/40" />
+                    <span className="h-2 w-2 rounded-full bg-white/40" />
+                    <span className="h-2 w-2 rounded-full bg-white/40" />
+                  </div>
+                </div>
+              </div> */}
+
+              {/* 캐릭터 이미지 */}
+              <div className="flex items-end justify-center w-full sm:max-w-[60%] md:max-w-[45%] lg:max-w-[35%]">
+                <Image
+                  src="/hero/hero_thinking.png"
+                  alt="보험 전문가 상담"
+                  width={520}
+                  height={420}
+                  priority
+                  className="w-full h-auto max-h-[45vh] object-contain object-bottom"
+                  style={{ filter: "drop-shadow(0 0 40px rgba(59,130,246,0.3))" }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* stats bar */}
+          <div className="relative z-10 border-t border-white/10 bg-white/5 backdrop-blur-sm">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 grid grid-cols-3 divide-x divide-white/10">
+              {[
+                { value: "12,000+", label: "누적 상담 건수" },
+                { value: "98%", label: "고객 만족도" },
+                { value: "15년", label: "보험 전문 경력" },
+              ].map(({ value, label }) => (
+                <div key={label} className="flex flex-col items-center gap-0.5 px-4 text-center">
+                  <span className="text-xl sm:text-2xl font-extrabold text-white">{value}</span>
+                  <span className="text-xs text-white/50">{label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* 보장분석 섹션 */}
+        <section id="benefit-analysis" className="bg-white py-16 md:py-30">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+              {/* 왼쪽 텍스트 */}
+              <div>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="h-px w-10 bg-[#1a56db]" />
+                  <span className="text-sm font-semibold text-[#1a56db] tracking-wide">보장분석</span>
+                </div>
+                <h2 className="text-4xl sm:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f2b5b]">
+                  내 보험,
+                  <br />
+                  제대로 알고 계신가요?
+                </h2>
+                <p className="mt-5 text-sm sm:text-base leading-relaxed text-[#64748b]">
+                  중복 가입, 보장 공백, 불필요한 보험료—
+                  <br />
+                  전문 FP가 꼼꼼히 분석해드립니다.
+                </p>
+                {/* 2x2 카드 그리드 */}
+                <AnalysisCardGrid />
+                <a
+                  href="#consult-form"
+                  className="mt-8 inline-flex items-center justify-center rounded-2xl bg-[#0f2b5b] px-8 py-6 text-base font-bold text-white shadow-md transition hover:bg-[#1a3a6e] w-full"
+                >
+                  무료 보장분석 받기 →
+                </a>
+              </div>
+
+              {/* 오른쪽 일러스트 */}
+              <div className="relative hidden md:flex items-center justify-center">
+                {/* 원형 배경 */}
+                <div className="absolute h-[420px] w-[420px] rounded-full bg-[#dbeafe] opacity-50" />
+
+                {/* 플로팅 아이콘들 */}
+                {/* <div className="absolute top-4 left-8 z-10 animate-float">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg border border-[#e2e8f0]">
+                  <span className="text-xl">🛡</span>
+                </div>
+              </div>
+              <div className="absolute top-4 right-8 z-10 animate-float-alt">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-lg border border-[#e2e8f0]">
+                  <span className="text-2xl">🏠</span>
+                </div>
+              </div>
+              <div className="absolute top-1/4 right-2 z-10 animate-float" style={{ animationDelay: "0.5s" }}>
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg border border-[#e2e8f0]">
+                  <span className="text-2xl">🪙</span>
+                </div>
+              </div> */}
+                {/* <div className="absolute left-2 top-1/3 z-10 animate-float-alt" style={{ animationDelay: "0.8s" }}>
+                <div className="flex h-12 w-16 items-center justify-center rounded-xl bg-white shadow-lg border border-[#e2e8f0]">
+                  <span className="text-2xl">💵</span>
+                </div>
+              </div> */}
+                {/* <div className="absolute right-6 top-1/2 z-10 animate-float" style={{ animationDelay: "1.2s" }}>
+                <div className="rounded-2xl border border-[#e2e8f0] bg-white px-3 py-2 shadow-lg">
+                  <div className="flex gap-1">
+                    <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
+                    <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
+                    <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
+                  </div>
+                </div>
+              </div> */}
+
+                {/* 캐릭터 */}
+                <div className="relative z-10">
+                  <Image src="/icon/family.png" alt="보장분석 캐릭터" width={430} height={380} className="h-auto w-[320px] md:w-[430px] object-contain " />
+                </div>
+
+                {/* 하단 우측 카드 */}
+                {/* <div className="absolute bottom-6 right-0 z-10">
+                <div className="rounded-2xl bg-[#0f2b5b] px-5 py-4 shadow-xl text-center">
+                  <p className="text-sm font-extrabold text-white">무료</p>
+                  <p className="text-xs text-[#93c5fd] mt-0.5">보장분석 서비스</p>
+                </div>
+              </div> */}
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* 맞춤 보장 무료 상담 섹션 */}
+        <section className="bg-[#f8fafc] py-16 md:py-30">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            {/* 타이틀 */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0f2b5b] leading-tight">
+                나만의 맞춤 보장 <strong className="text-[#1a56db]">무료 상담</strong>
+              </h2>
+              <p className="mt-3 text-base text-[#64748b]">복잡한 보험도 한번에 해결해보세요</p>
+            </div>
+
+            {/* 리스트 카드 */}
+            <BenefitCardList />
+
+            {/* 나만의 맞춤 보장 무료 상담 CTA 배너 */}
+            <div
+              className="mt-6 rounded-3xl px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
+              style={{ background: "linear-gradient(135deg, #0f2b5b 0%, #1a56db 100%)" }}
+            >
+              <div className="flex items-start gap-4">
+                <span className="flex-shrink-0 text-3xl animate-ring">⏰</span>
+                <div>
+                  <p className="text-base font-extrabold text-white leading-snug">상담을 미룰수록 보험료 조건은 더 불리해질 수 있습니다</p>
+                  <p className="mt-1 text-xs text-white/70">
+                    보험 나이 상승으로 평균 <span className="font-bold text-[#60a5fa]">5~10% 인상</span> · 지금 점검하면 최적 보험 구성 확인 가능
+                  </p>
+                </div>
+              </div>
+              <a
+                href="#consult-form"
+                className="flex-shrink-0 inline-flex items-center justify-center rounded-2xl border border-white/40 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/20 whitespace-nowrap"
+              >
+                지금 바로 점검받기 →
+              </a>
+            </div>
+          </div>
+        </section>
+        {/* 상담 이후 효과 섹션 */}
+        <section className="bg-white py-16 md:py-30">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0f2b5b] leading-tight">상담 이후 불필요한 보험료를 줄이세요</h2>
+              <p className="mt-3 text-base text-[#64748b]">상담 후 아래와 같은 혜택을 경험해보세요</p>
+            </div>
+
+            <BenefitStepCards />
+          </div>
+        </section>
+        {/* 여행 이벤트 섹션 */}
+        <section id="travel-event" className="relative overflow-hidden min-h-screen py-20 sm:py-28 flex items-center" style={{ backgroundColor: "#0f2b5b" }}>
+          {/* 배경 비디오 */}
+          <SlowVideoBg src="/video/bg_flight_01.mp4" rate={0.5} />
+          <div className="absolute inset-0" style={{ zIndex: 1, background: "linear-gradient(135deg, rgba(15,43,91,0.65) 0%, rgba(26,86,219,0.45) 30%, rgba(45,82,158,0.65) 50%)" }} />
+          {/* 하단 웨이브 */}
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 leading-0">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
+              <path d="M0 80 C360 0 1080 0 1440 80 L1440 80 L0 80 Z" fill="white" />
+            </svg>
+          </div>
+
+          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 w-full">
+            <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+              {/* 왼쪽 — 이미지 */}
+              <div className="relative flex items-center justify-center order-2 lg:order-1">
+                {/* 당첨 칩 */}
+                {/* <div className="absolute top-6 right-[10%] z-10 animate-float">
+                  <div className="flex items-center gap-2 rounded-2xl bg-white px-4 py-2.5 shadow-xl">
+                    <span className="text-lg">🎟️</span>
+                    <div>
+                      <p className="text-xs font-extrabold text-[#0f172a]">매월 추첨</p>
+                      <p className="text-[10px] text-[#64748b]">상담 완료 시 자동 응모</p>
+                    </div>
+                  </div>
+                </div> */}
+
+                {/* 캐릭터 */}
+                <div className="relative z-10 animate-float" style={{ animationDelay: "0.3s" }}>
+                  <Image
+                    src="/icon/flight.png"
+                    alt="여행 이벤트"
+                    width={380}
+                    height={380}
+                    className="h-auto w-[260px] sm:w-[320px] object-contain"
+                    style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.4))" }}
+                  />
+                </div>
+              </div>
+
+              {/* 오른쪽 — 흰색 카드 */}
+              <div className="order-1 lg:order-2">
+                <div className="rounded-3xl bg-white px-8 py-10 shadow-2xl shadow-black/30">
+                  {/* 배지 */}
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eff6ff] px-3 py-1 text-xs font-bold text-[#1a56db] mb-6">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3b82f6] opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#3b82f6]" />
+                    </span>
+                    이벤트 진행 중
+                  </span>
+
+                  {/* 헤딩 */}
+                  <h2 className="text-4xl sm:text-5xl font-extrabold leading-[1.1] tracking-tight text-[#0f172a]">
+                    상담만 받아도
+                    <br />
+                    <span className="text-[#1a56db]">여행이 공짜!</span>
+                  </h2>
+                  <p className="mt-4 text-[15px] leading-relaxed text-[#64748b]">
+                    보험 상담 완료 시 추첨을 통해
+                    <br />
+                    국내외 여행권을 드립니다.
+                  </p>
+
+                  {/* 혜택 리스트 */}
+                  <div className="mt-7 space-y-3">
+                    {[
+                      // { icon: "✈️", title: "국내 여행권", desc: "제주·부산·강원 등 인기 국내 여행지" },
+                      { icon: "🌏", title: "해외 여행권", desc: "다낭·세부·방콕 등 해외 패키지" },
+                      // { icon: "🎁", title: "상품권 증정", desc: "백화점·온라인 상품권" },
+                    ].map(({ icon, title, desc }) => (
+                      <div key={title} className="flex items-center gap-4 rounded-2xl bg-[#f8fafc] px-4 py-3.5">
+                        <span className="text-2xl flex-shrink-0">{icon}</span>
+                        <div>
+                          <p className="text-sm font-bold text-[#0f172a]">{title}</p>
+                          <p className="text-xs text-[#94a3b8] mt-0.5">{desc}</p>
+                        </div>
+                        <svg className="ml-auto h-4 w-4 flex-shrink-0 text-[#cbd5e1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <a href="#consult-form" className="mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#1a56db] py-4 text-base font-bold text-white transition hover:bg-[#1648c0]">
+                    무료 상담 신청하고 응모하기
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </a>
+                  <p className="mt-3 text-center text-xs text-[#94a3b8]">가입 권유 없음 · 완전 무료 · 24시간 내 연락</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* 여행지 사진 섹션 */}
+        <section className="bg-white py-16 sm:py-30 relative z-10 -mt-0.5">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0f2b5b]">어디로 떠나실 건가요?</h2>
+              <p className="mt-3 text-sm text-[#64748b]">상담 완료 고객 추첨을 통해 아래 여행지 중 선물해드립니다</p>
+            </div>
+
+            {/* 메인 큰 이미지 2개 */}
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-2 sm:mb-3">
+              {[
+                { src: "/tlabal/다낭.jpg", label: "다낭", sub: "베트남 · 골프 & 해양 스포츠" },
+                { src: "/tlabal/세부.jpg", label: "세부", sub: "필리핀 · 다이빙 & 리조트" },
+              ].map(({ src, label, sub }) => (
+                <div key={label} className="group relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[4/3]">
+                  <Image src={src} alt={label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 40vw" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-3 sm:p-5">
+                    <p className="text-sm sm:text-xl font-extrabold text-white">{label}</p>
+                    <p className="text-[10px] sm:text-xs text-white/75 mt-0.5 hidden sm:block">{sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 중간 3개 — 모바일~데스크탑 모두 3열 */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-2 sm:mb-3">
+              {[
+                { src: "/tlabal/보홀.jpg", label: "보홀", sub: "필리핀 · 에메랄드 바다" },
+                { src: "/tlabal/방콕_파타야.jpg", label: "방콕·파타야", sub: "태국 · 도시 & 해변" },
+                { src: "/tlabal/푸꾸옥.jpg", label: "푸꾸옥", sub: "베트남 · 섬 리조트" },
+              ].map(({ src, label, sub }) => (
+                <div key={label} className="group relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-square sm:aspect-3/2">
+                  <Image src={src} alt={label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 33vw" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-3 sm:p-4">
+                    <p className="text-sm sm:text-base font-extrabold text-white">{label}</p>
+                    <p className="text-[10px] sm:text-xs text-white/70 mt-0.5 hidden sm:block">{sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 하단 2개 — 모바일 1열 4/3, 태블릿↑ 2열 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+              {[
+                { src: "/tlabal/나트랑/달랏.jpg", label: "나트랑·달랏", sub: "베트남 · 휴양 & 고원 도시" },
+                { src: "/tlabal/비엔티안_방비엥.jpg", label: "비엔티안·방비엥", sub: "라오스 · 자연 & 문화" },
+              ].map(({ src, label, sub }) => (
+                <div key={label} className="group relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[4/3] sm:aspect-[16/7]">
+                  <Image src={src} alt={label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-3 sm:p-5">
+                    <p className="text-sm sm:text-lg font-extrabold text-white">{label}</p>
+                    <p className="text-[10px] sm:text-xs text-white/70 mt-0.5">{sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 하단 CTA */}
+            <div className="mt-10 text-center">
+              <a
+                href="#consult-form"
+                className="inline-flex items-center justify-center rounded-2xl bg-[#1a56db] px-10 py-4 text-base font-bold text-white shadow-lg shadow-[#1a56db]/30 transition hover:bg-[#1648c0] w-full"
+              >
+                무료 상담 신청하고 여행권 받기 →
+              </a>
+            </div>
+          </div>
+        </section>
+        {/* 암보험 섹션 */}
+        <section id="cancer-insurance" className="bg-[#fdf4f4] py-16 sm:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="grid gap-12 lg:grid-cols-2 lg:items-center mt-10">
+              {/* 왼쪽 — 캐릭터 + 플로팅 카드 */}
+              <div className="relative flex items-center justify-center">
+                {/* 핑크 원형 배경 */}
+                <div className="absolute hidden md:block h-[400px] w-[400px] rounded-full bg-[#fffbfb]" />
+
+                {/* 플로팅 아이콘 */}
+                {/* <div className="absolute top-8 left-[22%] z-10 animate-float">
+                  <span className="text-4xl drop-shadow">🏠</span>
+                </div>
+                <div className="absolute top-6 right-[22%] z-10 animate-float-alt">
+                  <span className="text-4xl drop-shadow">🪙</span>
+                </div>
+                <div className="absolute left-[10%] top-1/2 -translate-y-1/2 z-10 animate-float" style={{ animationDelay: "0.5s" }}>
+                  <span className="text-4xl drop-shadow">💵</span>
+                </div> */}
+                {/* <div className="absolute right-[12%] top-[42%] z-10 animate-float-alt" style={{ animationDelay: "0.8s" }}>
+                  <div className="rounded-2xl border border-[#e2e8f0] bg-white px-3 py-2 shadow">
+                    <div className="flex gap-1">
+                      <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
+                      <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
+                      <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
+                    </div>
+                  </div>
+                </div> */}
+                <div className="absolute top-[18%] right-[18%] z-10 animate-float" style={{ animationDelay: "1s" }}>
+                  <span className="text-2xl text-red-400 font-black drop-shadow">✕</span>
+                </div>
+
+                {/* 3명 중 1명 카드 */}
+                <div className="absolute top-4 right-4 z-10 animate-float-alt" style={{ animationDelay: "0.3s" }}>
+                  <div className="rounded-2xl border border-[#fecdd3] bg-white px-4 py-3 shadow-lg">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-lg">📈</span>
+                      <p className="text-sm font-extrabold text-[#e11d48]">3명 중 1명</p>
+                    </div>
+                    <p className="text-xs text-[#94a3b8]">평생 암 진단 위험</p>
+                  </div>
+                </div>
+
+                {/* 캐릭터 */}
+                <div className="relative z-10 pt-4 animate-float">
+                  <Image src="/icon/cancer.png" alt="암보험 상담" width={360} height={360} className="h-auto w-[280px] sm:w-[320px] object-contain" />
+                </div>
+
+                {/* 평균 3000만원 카드 */}
+                <div className="absolute bottom-6 left-2 z-10 animate-float">
+                  <div className="flex items-center gap-3 rounded-2xl border border-[#fecdd3] bg-white px-5 py-3 shadow-lg">
+                    <span className="text-2xl">💰</span>
+                    <div>
+                      <p className="text-sm font-extrabold text-[#e11d48]">평균 3,000만원</p>
+                      <p className="text-xs text-[#94a3b8]">암 치료 예상 비용</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 오른쪽 — 텍스트 */}
+              <div>
+                {/* <div className="flex items-center gap-2 mb-5">
+                  <div className="h-0.5 w-6 bg-[#1a56db]" />
+                  <div className="h-0.5 w-6 bg-[#e11d48]" />
+                  <span className="text-sm font-semibold text-[#e11d48] tracking-wide ml-1">암보험</span>
+                </div> */}
+                <h2 className="text-4xl sm:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f2b5b]">
+                  암 대비,
+                  <br />
+                  지금 준비해야 합니다
+                </h2>
+                <p className="mt-5 text-sm sm:text-base leading-relaxed text-[#64748b]">
+                  암 발생률은 매년 증가하고 있습니다.
+                  <br />
+                  지금 바로 준비하면 더 낮은 보험료로 더 큰 보장을 받을 수 있습니다.
+                </p>
+
+                {/* 암 보험 특징 리스트 */}
+                <CancerFeatureCards />
+
+                {/* CTA */}
+                <a
+                  href="#consult-form"
+                  className="mt-8 inline-flex items-center justify-center rounded-2xl bg-[#e11d48] px-8 py-4 text-base font-bold text-white shadow-lg shadow-[#e11d48]/30 transition hover:bg-[#be123c] w-full"
+                >
+                  암보험 지금 알아보기 →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* 올케어 암보험 섹션 */}
+        <section className="bg-[#f0f4ff] py-16 sm:py-24">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            {/* 헤더 */}
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <div className="h-0.5 w-8 bg-[#e11d48]" />
+                <span className="text-sm font-semibold text-[#e11d48] tracking-wide">올케어 암보험</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight text-[#0f2b5b]">
+                진단비도 치료비도 여러 번 보장하는
+                <br />
+                <span className="text-[#e11d48]">올케어 보장 꽉 채운 암보험!</span>
+              </h2>
+            </div>
+
+            {/* 카드 1 — 암 진단비 */}
+            <div className="relative rounded-3xl bg-white p-8 shadow-sm mb-4">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-shrink-0 flex flex-col items-start md:items-center gap-4">
+                  {/* <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f0f4ff] text-4xl">🔬</div> */}
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e11d48] text-lg font-black text-white">01</span>
+                </div>
+                <div className="flex-1">
+                  <span className="text-xs font-bold text-[#e11d48] mb-2 block">암 진단비</span>
+                  <h3 className="text-xl font-extrabold text-[#0f2b5b] mb-3">
+                    한 번만 보장하는 암 진단비 <span className="text-[#e11d48]">NO!</span>
+                  </h3>
+                  <p className="text-sm text-[#64748b] mb-1">통합암진단비를 각각 보장</p>
+                  <p className="text-xs text-[#94a3b8] mb-3">(유사암 제외)</p>
+                  <p className="text-sm text-[#475569]">
+                    걱정되는 <strong>전이암</strong>도 함께 대비할 수 있습니다.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {["통합암 각각 보장", "전이암 대비", "반복 지급"].map((tag) => (
+                      <span key={tag} className="rounded-full border border-[#fecdd3] bg-[#fff5f5] px-3 py-1 text-xs font-semibold text-[#e11d48]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
-              <ConsultForm variant="bottom" />
+            {/* 카드 2 — 암 치료비 */}
+            <div className="relative rounded-3xl bg-white p-8 shadow-sm mb-4">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-shrink-0 flex flex-col items-start md:items-center gap-4">
+                  {/* <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#fff5f5] text-4xl">💊</div> */}
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e11d48] text-lg font-black text-white">02</span>
+                </div>
+                <div className="flex-1">
+                  <span className="text-xs font-bold text-[#e11d48] mb-2 block">암 치료비</span>
+                  <h3 className="text-xl font-extrabold text-[#0f2b5b] mb-1">
+                    통합암 주요 치료비 하나로
+                    <br />
+                    매년 치료비 보장
+                  </h3>
+                  <p className="text-xs text-[#94a3b8] mt-1 mb-3">(각 통합암 진단 후 10년 간)</p>
+                  <p className="text-sm text-[#475569] mb-4">
+                    암수술, 항암치료, 신의료기술 치료
+                    <br />
+                    구분 없이 암 치료 시 보장합니다.
+                  </p>
+
+                  {/* 치료 방법 카드 */}
+                  <div className="grid grid-cols-4 gap-2 mb-4">
+                    {[
+                      { icon: "🔪", label: "암수술" },
+                      { icon: "💊", label: "항암약물치료" },
+                      { icon: "☢️", label: "항암방사선치료" },
+                      { icon: "🧬", label: "신의료기술" },
+                    ].map(({ icon, label }) => (
+                      <div key={label} className="flex flex-col items-center gap-1.5 rounded-2xl bg-[#fff5f5] py-4">
+                        <span className="text-2xl">{icon}</span>
+                        <span className="text-[10px] font-semibold text-[#64748b] text-center leading-tight">{label}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* 암 종류 태그 태그 */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {["폐암", "위암", "간암", "췌장암", "유방암", "자궁경부암", "전립선암", "특정소액암", "특정소화기암", "10대 특정암", "4대 고액암", "15대 특정암", "갑상선암", "기타피부암"].map(
+                      (t) => (
+                        <span key={t} className="rounded-full border border-[#e2e8f0] bg-white px-2.5 py-1 text-xs text-[#64748b]">
+                          {t}
+                        </span>
+                      ),
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
+
+            {/* 카드 3 — 최신 암치료 */}
+            <div className="relative rounded-3xl bg-white p-8 shadow-sm mb-10">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-shrink-0 flex flex-col items-start md:items-center gap-4">
+                  {/* <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#ede9fe] text-4xl">⚛️</div> */}
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e11d48] text-lg font-black text-white">03</span>
+                </div>
+                <div className="flex-1">
+                  <span className="text-xs font-bold text-[#e11d48] mb-2 block">최신 암치료</span>
+                  <h3 className="text-xl font-extrabold text-[#0f2b5b] mb-1">
+                    부작용 적은 최신 암치료, 중입자 방사선 치료까지
+                    <br />
+                    든든하게 보장!
+                  </h3>
+                  <p className="text-xs text-[#94a3b8] mt-1 mb-4">(특약 가입 시)</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {["중입자 방사선치료", "최신 치료 보장", "부작용 최소화"].map((tag) => (
+                      <span key={tag} className="rounded-full border border-[#fecdd3] bg-[#fff5f5] px-3 py-1 text-xs font-semibold text-[#e11d48]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {/* 파란 배너 */}
+                  <div className="rounded-2xl px-5 py-4 mb-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg, #f4f5f7 0%, #f3f7ff 100%)" }}>
+                    <span className="text-2xl flex-shrink-0">💰</span>
+                    <div>
+                      <p className="text-sm text-zinc-700">고액 치료비에 대한 부담은 덜고</p>
+                      <p className="text-sm font-bold text-zinc-800">치료에 집중하세요.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center">
+              <a
+                href="#consult-form"
+                className="inline-flex items-center justify-center rounded-2xl bg-[#e11d48] px-10 py-4 text-base font-bold text-white shadow-lg shadow-[#e11d48]/30 transition hover:bg-[#be123c] w-full"
+              >
+                암보험 무료 상담받기 →
+              </a>
+            </div>
+          </div>
+        </section>
+        {/* 주요 내용
+      <section className="bg-white py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+            <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">주요 혜택</span>
+            <div className="h-px w-12 bg-[#bfdbfe]" />
+          </div>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0f2b5b]">
+              상담 한 번으로
+              <br />
+              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">모든 보험을 점검</span>
+            </h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { num: "01", title: "원하는 날짜·시간 상담 가능", desc: "고객 일정에 맞춰 유연하게 예약" },
+              { num: "02", title: "복잡한 보험 정밀 분석", desc: "보유 보험 전체를 한눈에 정리" },
+              { num: "03", title: "상세 리포트 무료 제공", desc: "분석 결과를 문서로 제공" },
+              { num: "04", title: "가입 권유 없는 무료 상담", desc: "신규 가입 강요 없이 진행" },
+              { num: "05", title: "가족 보험 통합 관리", desc: "가족 단위 보장 비교 가능" },
+              { num: "06", title: "여행 이벤트 참여 기회", desc: "상담 완료 고객 동남아 여행권" },
+            ].map(({ num, title, desc }) => (
+              <div key={num} className="flex items-start gap-4 rounded-3xl border border-[#dbeafe] bg-white px-6 py-7 shadow-sm hover:shadow-md transition-shadow">
+                <span className="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">{num}</span>
+                <div>
+                  <p className="font-bold text-[#0f2b5b] text-sm">{title}</p>
+                  <p className="mt-1 text-xs text-[#64748b]">{desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section> */}
-
-      <section data-animate className="a-qna bg-white py-16 sm:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10">
-            <div className="section-divider mx-auto mb-4" />
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f2b5b]">자주 묻는 질문</h2>
-            <p className="mt-3 text-sm sm:text-base text-[#64748b]">상담 신청 전 가장 많이 확인하는 질문을 정리했습니다.</p>
-          </div>
-          <FAQAccordion />
-        </div>
-      </section>
-
-      <section id="section-travel" data-animate className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-28">
-        {/* background blobs */}
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <div className="absolute -top-24 -left-24 h-[480px] w-[480px] rounded-full bg-[#dbeafe] opacity-50 blur-[96px]" />
-          <div className="absolute bottom-0 -right-16 h-[320px] w-[320px] rounded-full bg-[#bfdbfe] opacity-30 blur-[80px]" />
-        </div>
-
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          {/* eyebrow */}
-          <div className="flex justify-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#bfdbfe] bg-[#eff6ff] px-4 py-1.5 text-sm font-semibold text-[#1a56db]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a56db] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1a56db]" />
-              </span>
-              상담 완료 고객 대상 여행 이벤트
-            </span>
-          </div>
-
-          {/* headline */}
-          <div className="mt-6 text-center">
-            <h2 className="text-4xl sm:text-5xl lg:text-[64px] font-extrabold leading-[1.1] tracking-tight text-[#0f172a]">
-              보험 점검하고
-              <br />
-              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">동남아 여행까지</span>
-            </h2>
-            <p className="mt-5 mx-auto max-w-xl text-base sm:text-lg leading-relaxed text-[#64748b]">
-              상담 완료 고객 전원에게
-              <br className="hidden sm:block" /> 동남아 3박5일 풀패키지 여행 기회를 드립니다.
-            </p>
-          </div>
-
-          {/* CTA row */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href="#consult-form"
-              className="inline-flex h-14 items-center justify-center rounded-2xl bg-[#1a56db] px-8 text-base font-bold text-white shadow-lg shadow-[#1a56db]/30 transition hover:bg-[#1648c0]"
-            >
-              무료 상담 신청
-            </a>
-            <a
-              href="#consult-form"
-              className="inline-flex h-14 items-center justify-center rounded-2xl border border-[#cbd5e1] bg-white px-8 text-base font-semibold text-[#334155] transition hover:border-[#1a56db] hover:text-[#1a56db]"
-            >
-              이벤트 자세히 보기
-            </a>
-          </div>
-
-          {/* main image + floating cards */}
-          <div className="relative mx-auto mt-12 flex justify-center">
-            {/* left floating card — 3박5일 여행권 */}
-            <div className="absolute left-0 top-1/4 hidden lg:block animate-float z-10">
-              <div className="relative w-44 text-center rounded-2xl border border-[#dbeafe] bg-white p-6 shadow-xl">
-                <p className="text-sm font-extrabold text-[#1648c0]">3박5일 여행권</p>
-                <p className="mt-1 text-sm text-[#64748b] leading-relaxed">
-                  리조트 숙박
-                  <br />
-                  <strong>+ 액티비티 포함</strong>
-                </p>
-                <span className="absolute -right-2.5 top-1/2 -translate-y-1/2 h-5 w-5 rotate-45 border-r border-t border-[#dbeafe] bg-white" />
-              </div>
-              <div className="mt-2 flex justify-end gap-1.5 pr-1">
-                <span className="h-2 w-2 rounded-full bg-[#bfdbfe]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#93c5fd]" />
-                <span className="h-1 w-1 rounded-full bg-[#60a5fa]" />
-              </div>
+        {/* FAQ */}
+        <section id="faq" className="bg-[#ffffff] py-16 sm:py-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f2b5b]">자주 묻는 질문</h2>
+              <p className="mt-3 text-sm text-[#64748b]">상담 신청 전 가장 많이 확인하는 질문을 정리했습니다.</p>
             </div>
-
-            <Image src="/hero/hero_passfort.jpg" alt="동남아 여행 이벤트" width={720} height={460} className="w-full md:max-w-[30%] lg:max-w-[40%] rounded-t-3xl object-cover mb-16" />
-
-            {/* right floating card — 전원 응모 */}
-            <div className="absolute right-0 top-1/4 hidden lg:block animate-float-alt z-10">
-              <div className="relative w-44 text-center rounded-2xl border border-[#dbeafe] bg-white p-6 shadow-xl">
-                <p className="text-sm font-extrabold text-[#1648c0]">전원 응모 가능</p>
-                <p className="mt-1 text-sm text-[#64748b] leading-relaxed">
-                  상담 완료 고객
-                  <br />
-                  <strong>누구나 참여</strong>
-                </p>
-                <span className="absolute -left-2.5 top-1/2 -translate-y-1/2 h-5 w-5 rotate-45 border-l border-b border-[#dbeafe] bg-white" />
-              </div>
-              <div className="mt-2 flex justify-start gap-1.5 pl-1">
-                <span className="h-1 w-1 rounded-full bg-[#60a5fa]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#93c5fd]" />
-                <span className="h-2 w-2 rounded-full bg-[#bfdbfe]" />
-              </div>
-            </div>
+            <FAQAccordion />
           </div>
-
-          {/* mobile cards */}
-          <div className="mt-4 grid grid-cols-2 gap-3 lg:hidden mb-10">
-            <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md">
-              <p className="text-sm font-extrabold text-[#1648c0]">3박5일 여행권</p>
-              <p className="mt-1 text-xs text-[#64748b] leading-snug">리조트 숙박 + 액티비티 + 차량 지원</p>
-            </div>
-            <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md">
-              <p className="text-sm font-extrabold text-[#1648c0]">전원 응모 가능</p>
-              <p className="mt-1 text-xs text-[#64748b] leading-snug">상담 완료 고객 누구나 참여</p>
-            </div>
-          </div>
-        </div>
-
-        {/* bottom stats bar */}
-        <div className="relative z-10 border-t border-[#e2e8f0] bg-[#f8fafc]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-3 divide-x divide-[#e2e8f0]">
-            {[
-              { value: "3박5일", label: "동남아 풀패키지" },
-              { value: "전원", label: "상담 고객 응모" },
-              { value: "무료", label: "상담 비용" },
-            ].map(({ value, label }) => (
-              <div key={label} className="flex flex-col items-center gap-0.5 px-4 text-center">
-                <span className="text-2xl font-extrabold text-[#1a56db]">{value}</span>
-                <span className="text-xs text-[#64748b]">{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 여행 사진 그리드 */}
-      <section data-animate className="relative overflow-hidden bg-white py-24 sm:py-20">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#dbeafe] opacity-40 blur-[80px]" />
-        </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-            <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">✈</span>
-              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">여행지 미리보기</span>
-            </div>
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-          </div>
-          <div className="mt-6 text-center">
-            <h2 className="text-3xl sm:text-4xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
-              상담 완료 후 떠나는
-              <br />
-              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">동남아 3박5일</span>
-            </h2>
-            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">리조트 숙박부터 액티비티까지 풀패키지로 제공됩니다.</p>
-          </div>
-          <div className="mt-10 grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
-            {(() => {
-              const destinations = [
-                { label: "다낭", sub: "베트남 · 골프 & 해양 스포츠", src: "/tlabal/다낭.jpg" },
-                { label: "세부", sub: "필리핀 · 다이빙 & 리조트", src: "/tlabal/세부.jpg" },
-                { label: "보홀", sub: "필리핀 · 에메랄드 바다", src: "/tlabal/보홀.jpg" },
-                { label: "나트랑 · 달랏", sub: "베트남 · 휴양 & 고원 도시", src: "/tlabal/나트랑/달랏.jpg" },
-                { label: "방콕 · 파타야", sub: "태국 · 도시 & 해변 리조트", src: "/tlabal/방콕_파타야.jpg" },
-                { label: "푸꾸옥", sub: "베트남 · 섬 리조트", src: "/tlabal/푸꾸옥.jpg" },
-                { label: "비엔티안 · 방비엥", sub: "라오스 · 자연 & 문화", src: "/tlabal/비엔티안_방비엥.jpg" },
-              ];
-              return destinations.map(({ label, sub, src }, i) => {
-                const isLastOdd = i === destinations.length - 1 && destinations.length % 2 !== 0;
-                return (
-                  <div
-                    key={label}
-                    className={`group overflow-hidden rounded-3xl border border-[#dbeafe] bg-[#f8faff] shadow-sm hover:shadow-md transition-shadow${isLastOdd ? " col-span-2 justify-self-center w-1/2 sm:col-span-3 sm:w-1/3 lg:col-span-1 lg:w-full lg:justify-self-auto" : ""}`}
-                  >
-                    <div className="relative h-52 w-full">
-                      <Image
-                        src={src}
-                        alt={label}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      />
-                    </div>
-                    <div className="px-5 py-4">
-                      <p className="text-base font-extrabold text-[#0f2b5b]">{label}</p>
-                      <p className="mt-1 text-xs text-[#64748b]">{sub}</p>
-                    </div>
-                  </div>
-                );
-              });
-            })()}
-          </div>
-        </div>
-      </section>
-
-      {/* 05-b 상담 서비스 내용 — coverage-01 스타일 */}
-      <section data-animate className="relative overflow-hidden bg-[#eff6ff] py-24 sm:py-20">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
-        </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-            <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">05</span>
-              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">상담 서비스 내용</span>
-            </div>
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-          </div>
-          <div className="mt-6 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
-              상담에서 확인할 수 있는
-              <br />
-              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">핵심 서비스</span>
-            </h2>
-            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">
-              여행 이벤트와 별개로 실제 상담에서 제공되는
-              <br className="hidden sm:block" /> 서비스 내용을 항목별로 정리했습니다.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {travelSections[1].items.map((item, i) => (
-              <div key={i} className="flex flex-col items-center gap-4 rounded-3xl border border-[#dbeafe] bg-white px-6 py-8 text-center shadow-sm hover:shadow-md transition-shadow">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#1a56db] text-sm font-black text-white">{String(i + 1).padStart(2, "0")}</span>
-                <p className="text-sm font-bold leading-snug text-[#0f2b5b]">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 05-c, 05-d */}
-      {travelInfoSections.slice(1, 3).map((section) => (
-        <InfoSection key={section.eyebrow} eyebrow={section.eyebrow} title={section.title} description={section.description} items={[...section.items]} variant={section.variant} />
-      ))}
-
-      {/* 05-e FAQ — a-qna 동일 레이아웃 */}
-      <section data-animate className="bg-white py-16 sm:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10">
-            <div className="section-divider mx-auto mb-4" />
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f2b5b]">상담 전 자주 묻는 핵심 안내</h2>
-            <p className="mt-3 text-sm sm:text-base text-[#64748b]">상담 전 부담을 줄일 수 있도록 가장 많이 확인하는 내용을 먼저 정리했습니다.</p>
-          </div>
-          <FAQAccordion
-            items={[
-              { q: "상담을 받으면 보험 가입을 강요받나요?", a: "아닙니다. 기존 보험 점검과 보장 분석 중심으로 진행되며, 신규 가입은 고객의 선택에 맡깁니다." },
-              { q: "현재 가입된 보험을 객관적으로 분석해 주나요?", a: "네. 보유 중인 보험 전체를 중립적 시각으로 분석해 보장 현황과 개선 방향을 안내해 드립니다." },
-              { q: "가족 보험도 함께 점검할 수 있나요?", a: "가능합니다. 가족 단위 보장 비교와 통합 관리 방향까지 함께 안내해 드립니다." },
-              { q: "꼭 대면으로 방문해야 상담을 받을 수 있나요?", a: "아닙니다. 전화 또는 비대면 방식으로도 동일한 품질의 보장 분석 상담이 가능합니다." },
-            ]}
+        </section>
+        {/* 상담 신청 폼 */}
+        <section id="consult-form" className="relative overflow-hidden py-20 sm:py-28">
+          {/* 배경 비디오 */}
+          <video autoPlay muted loop playsInline className="pointer-events-none absolute inset-0 h-full w-full object-cover" style={{ zIndex: 0 }}>
+            <source src="/video/contact.mp4" type="video/mp4" />
+          </video>
+          {/* 오버레이 */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{ zIndex: 1, background: "linear-gradient(135deg, rgba(10,22,40,0.82) 0%, rgba(13,32,69,0.78) 60%, rgba(7,20,40,0.85) 100%)" }}
           />
-        </div>
-      </section>
-
-      <section id="section-cancer" data-animate className="relative scroll-mt-16 overflow-hidden bg-white pt-16 pb-0 sm:pt-20 lg:pt-28">
-        {/* background blobs */}
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <div className="absolute -top-24 -right-24 h-[480px] w-[480px] rounded-full bg-[#dbeafe] opacity-50 blur-[96px]" />
-          <div className="absolute bottom-0 -left-16 h-[320px] w-[320px] rounded-full bg-[#bfdbfe] opacity-30 blur-[80px]" />
-        </div>
-
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          {/* eyebrow */}
-          <div className="flex justify-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#bfdbfe] bg-[#eff6ff] px-4 py-1.5 text-sm font-semibold text-[#1a56db]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a56db] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1a56db]" />
+          <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-6">
+            {/* 헤더 */}
+            <div className="text-center mb-10">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#60a5fa]/30 bg-[#1a56db]/20 px-4 py-1.5 text-sm font-semibold text-[#60a5fa] backdrop-blur-sm mb-5">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#60a5fa] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#60a5fa]" />
+                </span>
+                무료 보장 분석
               </span>
-              암보험 무료 전문가 상담
-            </span>
-          </div>
-
-          {/* headline */}
-          <div className="mt-6 text-center">
-            <h2 className="text-4xl sm:text-5xl lg:text-[64px] font-extrabold leading-[1.1] tracking-tight text-[#0f172a]">
-              암보험 보장,
-              <br />
-              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">전문가와 점검하세요</span>
-            </h2>
-            <p className="mt-5 mx-auto max-w-xl text-base sm:text-lg leading-relaxed text-[#64748b]">
-              암 치료비·전이암 보장까지 한 번에 확인하고
-              <br className="hidden sm:block" /> 월 부담을 고려한 맞춤 설계를 받아보세요.
-            </p>
-          </div>
-
-          {/* CTA row */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href="#consult-form"
-              className="inline-flex h-14 items-center justify-center rounded-2xl bg-[#1a56db] px-8 text-base font-bold text-white shadow-lg shadow-[#1a56db]/30 transition hover:bg-[#1648c0]"
-            >
-              암보험 상담 신청
-            </a>
-            <a
-              href="#consult-form"
-              className="inline-flex h-14 items-center justify-center rounded-2xl border border-[#cbd5e1] bg-white px-8 text-base font-semibold text-[#334155] transition hover:border-[#1a56db] hover:text-[#1a56db]"
-            >
-              30초 보장 진단
-            </a>
-          </div>
-
-          {/* main image + floating cards */}
-          <div className="relative mx-auto mt-12 flex justify-center">
-            {/* left floating card — 치료비 대비 */}
-            <div className="absolute left-0 top-1/4 hidden lg:block animate-float z-10">
-              <div className="relative w-44 text-center rounded-2xl border border-[#dbeafe] bg-white p-6 shadow-xl">
-                <p className="text-sm font-extrabold text-[#1648c0]">치료비 대비</p>
-                <p className="mt-1 text-sm text-[#64748b] leading-relaxed">
-                  암 치료비 보장
-                  <br />
-                  <strong>전이암까지 커버</strong>
-                </p>
-                <span className="absolute -right-2.5 top-1/2 -translate-y-1/2 h-5 w-5 rotate-45 border-r border-t border-[#dbeafe] bg-white" />
-              </div>
-              <div className="mt-2 flex justify-end gap-1.5 pr-1">
-                <span className="h-2 w-2 rounded-full bg-[#bfdbfe]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#93c5fd]" />
-                <span className="h-1 w-1 rounded-full bg-[#60a5fa]" />
-              </div>
-            </div>
-
-            <Image src="/hero/hero_contract.jpg" alt="암보험 전문 상담" width={720} height={460} className="w-full md:max-w-[30%] lg:max-w-[40%] rounded-t-3xl ml-34 object-cover mb-16" />
-
-            {/* right floating card — 월 1만원대 */}
-            <div className="absolute right-0 top-1/4 hidden lg:block animate-float-alt z-10">
-              <div className="relative w-44 text-center rounded-2xl border border-[#dbeafe] bg-white p-6 shadow-xl">
-                <p className="text-sm font-extrabold text-[#1648c0]">월 1만원대</p>
-                <p className="mt-1 text-sm text-[#64748b] leading-relaxed">
-                  부담 없는 보장
-                  <br />
-                  <strong>설계 가능</strong>
-                </p>
-                <span className="absolute -left-2.5 top-1/2 -translate-y-1/2 h-5 w-5 rotate-45 border-l border-b border-[#dbeafe] bg-white" />
-              </div>
-              <div className="mt-2 flex justify-start gap-1.5 pl-1">
-                <span className="h-1 w-1 rounded-full bg-[#60a5fa]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#93c5fd]" />
-                <span className="h-2 w-2 rounded-full bg-[#bfdbfe]" />
-              </div>
-            </div>
-          </div>
-
-          {/* mobile cards */}
-          <div className="mt-4 grid grid-cols-2 gap-3 lg:hidden mb-10">
-            <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md">
-              <p className="text-sm font-extrabold text-[#1648c0]">치료비 대비</p>
-              <p className="mt-1 text-xs text-[#64748b] leading-snug">암 치료비 + 전이암까지 보장 점검</p>
-            </div>
-            <div className="rounded-2xl border border-[#dbeafe] bg-white p-4 shadow-md">
-              <p className="text-sm font-extrabold text-[#1648c0]">월 1만원대</p>
-              <p className="mt-1 text-xs text-[#64748b] leading-snug">부담 없는 맞춤 보장 설계 가능</p>
-            </div>
-          </div>
-        </div>
-
-        {/* bottom stats bar */}
-        <div className="relative z-10 border-t border-[#e2e8f0] bg-[#f8fafc]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-3 divide-x divide-[#e2e8f0]">
-            {[
-              { value: "무료", label: "전문가 상담" },
-              { value: "30초", label: "보장 진단" },
-              { value: "전이암", label: "보장 점검 포함" },
-            ].map(({ value, label }) => (
-              <div key={label} className="flex flex-col items-center gap-0.5 px-4 text-center">
-                <span className="text-2xl font-extrabold text-[#1a56db]">{value}</span>
-                <span className="text-xs text-[#64748b]">{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 06-b 핵심 가치 — coverage-01 스타일 */}
-      <section data-animate className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
-        </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-            <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">06</span>
-              <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">핵심 가치</span>
-            </div>
-            <div className="h-px w-12 bg-[#bfdbfe]" />
-          </div>
-          <div className="mt-6 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
-              암보험 상담에서 확인하는
-              <br />
-              <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">핵심 분석 가치</span>
-            </h2>
-            <p className="mt-4 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[#64748b]">
-              단순 상품 안내가 아니라 현재 보장을 기준으로
-              <br className="hidden sm:block" /> 치료비와 전이암 대응까지 구체적으로 점검합니다.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {(["암 치료비 대비 보장 분석", "전이암까지 보장 설계", "부족한 보장 스마트 분석", "30초 보장 진단"] as const).map((item, i) => (
-              <div key={i} className="flex flex-col items-center gap-4 rounded-3xl border border-[#dbeafe] bg-white px-6 py-8 text-center shadow-sm hover:shadow-md transition-shadow">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#1a56db] text-sm font-black text-white">{String(i + 1).padStart(2, "0")}</span>
-                <p className="text-sm font-bold leading-snug text-[#0f2b5b]">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 06-c, 06-d */}
-      {cancerInfoSections.slice(1, -1).map((section) => (
-        <InfoSection key={section.eyebrow} eyebrow={section.eyebrow} title={section.title} description={section.description} items={[...section.items]} variant={section.variant} />
-      ))}
-
-      {/* 06-e FAQ — a-qna 동일 레이아웃 */}
-      <section data-animate className="bg-white py-16 sm:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10">
-            <div className="section-divider mx-auto mb-4" />
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f2b5b]">상담 전 꼭 확인하는 안내 사항</h2>
-            <p className="mt-3 text-sm sm:text-base text-[#64748b]">가입 강요 여부, 가족 보험 점검, 상담 방식과 이벤트 운영 방식까지 자주 묻는 내용을 정리했습니다.</p>
-          </div>
-          <FAQAccordion
-            items={[
-              { q: "상담을 받으면 보험 신규 가입을 강요받나요?", a: "아닙니다. 기존 보험 점검과 보장 분석 중심으로 진행되며, 신규 가입 여부는 고객의 의사에 따라 결정됩니다." },
-              { q: "가족 보험도 함께 점검할 수 있나요?", a: "가능합니다. 가족 단위로 보장을 비교 분석하고 통합 관리 방향을 함께 안내해 드립니다." },
-              { q: "상담은 어떤 방식으로 진행되나요?", a: "보험 전문가가 직접 진행하며, 대면 또는 전화·비대면 방식 중 편한 방법으로 선택하실 수 있습니다." },
-              { q: "이벤트 당첨은 어떻게 결정되나요?", a: "이벤트 참여 조건을 충족한 고객 중 공정한 추첨 방식으로 진행되며, 결과는 개별 안내드립니다." },
-            ]}
-          />
-        </div>
-      </section>
-
-      <section id="consult-form" data-animate className="relative overflow-hidden bg-[#eff6ff] py-16 sm:py-20">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 h-[300px] w-[600px] rounded-full bg-[#bfdbfe] opacity-40 blur-[80px]" />
-        </div>
-        <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-6">
-          <div className="rounded-3xl border border-[#dbeafe] bg-white px-8 py-10 shadow-xl sm:px-10 sm:py-12">
-            {/* eyebrow */}
-            <div className="flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-[#bfdbfe]" />
-              <div className="flex items-center gap-2">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1a56db] text-[11px] font-black text-white">✓</span>
-                <span className="text-sm font-bold tracking-widest text-[#1a56db] uppercase">CONTACT</span>
-              </div>
-              <div className="h-px w-12 bg-[#bfdbfe]" />
-            </div>
-            {/* headline */}
-            <div className="mt-6 text-center">
-              <h2 className="text-3xl sm:text-4xl font-extrabold leading-[1.15] tracking-tight text-[#0f172a]">
-                보험 전문 점검
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                지금 바로 신청하고
                 <br />
-                <span className="bg-gradient-to-r from-[#1a56db] to-[#3b82f6] bg-clip-text text-transparent">무료 상담 신청</span>
+                <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">전문가에게 연락받기</span>
               </h2>
-              <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#64748b]">가입 권유 없이 현재 보험을 객관적으로 분석해 드립니다.</p>
             </div>
-            {/* form */}
-            <BottomConsultForm />
-            <p className="mt-4 text-center text-xs text-[#94a3b8]">가입 권유 없음 · 무료 진행 · 24시간 내 연락</p>
-          </div>
-        </div>
-      </section>
-
-      <ScrollAnimations />
-      <ScrollToTopButton />
-
-      {/* FOOTER */}
-      <footer className="bg-navy py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <div className="flex items-center gap-2">
-              <svg className="w-7 h-7 text-[#93c5fd]" viewBox="0 0 32 32" fill="none">
-                <path d="M16 2L4 7v9c0 7 5.5 12.5 12 14 6.5-1.5 12-7 12-14V7L16 2z" fill="#93c5fd" fillOpacity="0.2" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round" />
-                <path d="M11 16l3.5 3.5L21 12" stroke="#93c5fd" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span className="text-white font-bold text-base">와이즈피플코리아</span>
+            {/* 신뢰 배지 */}
+            <div className="flex justify-center gap-6 mb-8">
+              {["가입 권유 없음", "완전 무료", "24시간 내 연락"].map((t) => (
+                <div key={t} className="flex items-center gap-1.5 text-xs font-semibold text-white/70">
+                  <svg className="h-3.5 w-3.5 flex-shrink-0 text-[#60a5fa]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t}
+                </div>
+              ))}
             </div>
-            <a href="tel:15880000" className="text-[#93c5fd] font-semibold text-sm hover:text-white transition-colors">
-              ☎ 1588-0000
-            </a>
+            {/* 폼 카드 */}
+            <div className="rounded-3xl bg-white px-8 py-10 shadow-2xl shadow-black/30 sm:px-10 sm:py-12">
+              <BottomConsultForm />
+            </div>
           </div>
-          <div className="border-t border-white/10 pt-6">
-            <p className="text-white/50 text-xs leading-relaxed mb-2">상호: 주식회사 와이즈피플코리아 &nbsp;|&nbsp; 사업자등록번호: 000-00-00000 &nbsp;|&nbsp; 대표: 홍길동</p>
-            <p className="text-white/50 text-xs leading-relaxed mb-4">주소: 서울특별시 강남구 테헤란로 000, 00층 &nbsp;|&nbsp; 이메일: info@wisepplkorea.com</p>
-            <p className="text-white/30 text-xs">© 2026 와이즈피플코리아. All rights reserved.</p>
+        </section>
+        <ScrollAnimations />
+        <ScrollToTopButton />
+        {/* FOOTER */}
+        <footer className="bg-[#07111f] py-10">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+              <div className="flex items-center gap-2">
+                <svg className="w-7 h-7 text-[#93c5fd]" viewBox="0 0 32 32" fill="none">
+                  <path d="M16 2L4 7v9c0 7 5.5 12.5 12 14 6.5-1.5 12-7 12-14V7L16 2z" fill="#93c5fd" fillOpacity="0.2" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M11 16l3.5 3.5L21 12" stroke="#93c5fd" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-white font-bold text-base">와이즈피플코리아</span>
+              </div>
+              <a href="tel:16615022" className="text-[#93c5fd] font-semibold text-sm hover:text-white transition-colors">
+                ☎ 1661-5022
+              </a>
+            </div>
+            <div className="border-t border-white/10 pt-6">
+              <p className="text-white/50 text-xs leading-relaxed mb-2">상호: 와이즈피플코리아 &nbsp;|&nbsp; 사업자등록번호: 858-04-01783 &nbsp;|&nbsp; 대표: 임은정</p>
+              <p className="text-white/50 text-xs leading-relaxed mb-4">주소: 서울시 금천구 가산디지털1로 212, 208호 &nbsp;|&nbsp; 이메일: pangsls@naver.com</p>
+              <p className="text-white/30 text-xs">© 2026 와이즈피플코리아. All rights reserved.</p>
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </TwemojiWrapper>
   );
 }

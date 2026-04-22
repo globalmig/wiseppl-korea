@@ -15,31 +15,62 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
         <div className="max-h-[60vh] overflow-y-auto px-6 py-5 text-sm text-[#334155] space-y-4">
+          <p className="leading-relaxed text-[#64748b]">
+            온커넥트(이하 &ldquo;당사&rdquo;라 함)는 귀하의 개인정보를 매우 중요하게 생각하며, 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 등 관련 법령을 준수하고 있습니다.
+            당사는 페이스북(Meta) 광고 양식을 통해 수집되는 개인정보의 수집, 이용 및 제3자 제공 목적을 아래와 같이 안내해 드립니다.
+          </p>
           <section>
-            <h3 className="mb-1.5 font-semibold text-[#1e293b]">1. 수집하는 개인정보 항목</h3>
-            <p className="leading-relaxed text-[#64748b]">이름, 휴대폰 번호, 생년월일, 거주 지역</p>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">1. 개인정보 수집 및 이용 주체</h3>
+            <p className="leading-relaxed text-[#64748b]">수집 주체: 온커넥트</p>
+            <p className="leading-relaxed text-[#64748b]">당사는 보험 상담 접수 및 서비스 안내를 목적으로 고객님의 개인정보를 직접 수집합니다.</p>
           </section>
           <section>
-            <h3 className="mb-1.5 font-semibold text-[#1e293b]">2. 개인정보의 수집 및 이용 목적</h3>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">2. 수집하는 개인정보 항목 및 수집 방법</h3>
+            <p className="leading-relaxed text-[#64748b]">수집 항목: 이름, 휴대전화번호, 성별, 연령대(생년월일), 거주지역 등 (페이스북 입력 양식에 표기된 항목)</p>
+            <p className="leading-relaxed text-[#64748b]">수집 방법: 페이스북(Meta) 잠재 고객 확보 양식(인스턴트 양식)을 통한 고객의 자발적 입력 및 제출</p>
+          </section>
+          <section>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">3. 개인정보의 수집 및 이용 목적</h3>
             <ul className="list-disc list-inside space-y-1 text-[#64748b] leading-relaxed">
-              <li>무료 보장 분석 상담 진행</li>
-              <li>상담 일정 조율 및 결과 안내</li>
-              <li>고객 문의에 대한 답변</li>
+              <li>고객 상담 접수 및 본인 확인</li>
+              <li>보험 상품 소개, 보장 분석, 가입 권유 및 맞춤형 재무설계</li>
+              <li>이벤트 안내 및 마케팅 자료 활용</li>
             </ul>
           </section>
           <section>
-            <h3 className="mb-1.5 font-semibold text-[#1e293b]">3. 개인정보의 보유 및 이용 기간</h3>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">4. 개인정보의 제3자 제공</h3>
+            <p className="leading-relaxed text-[#64748b] mb-2">
+              당사는 수집한 개인정보를 원활한 상담 및 맞춤형 금융서비스 제공을 위하여, 아래와 같이 제3자(제휴 보험대리점)에게 제공합니다.
+              양식을 제출하시는 것은 본 제3자 제공에 동의하는 것으로 간주됩니다.
+            </p>
+            <ul className="space-y-1 text-[#64748b] leading-relaxed">
+              <li><span className="font-semibold text-[#475569]">제공받는 자:</span> (주)영진에셋, 글로벌금융, 신한금융파트너스, GA코리아, HK금융파트너스, 인카금융, 한화금융서비스</li>
+              <li><span className="font-semibold text-[#475569]">제공 목적:</span> 보험 상품 소개, 맞춤형 재무설계, TM(텔레마케팅) 상담 및 관련 영업 안내</li>
+              <li><span className="font-semibold text-[#475569]">제공 항목:</span> 이름, 휴대전화번호, 성별, 연령대, 거주지역 등 수집된 정보 일체</li>
+              <li><span className="font-semibold text-[#475569]">보유 및 이용 기간:</span> 제공받은 날로부터 1년</li>
+            </ul>
+          </section>
+          <section>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">5. 개인정보의 보유 및 이용 기간</h3>
             <p className="leading-relaxed text-[#64748b]">
-              상담 완료 후 <strong className="text-[#1e293b]">3개월</strong> 보관 후 파기합니다.
+              수집된 개인정보는 동의일로부터 <strong className="text-[#1e293b]">1년간</strong> 보유 및 이용됩니다.
+              원칙적으로 개인정보 수집 및 이용 목적이 달성된 후, 또는 보유 기간(1년)이 경과한 후에는 해당 정보를 지체 없이 복구 불가능한 방법으로 파기합니다.
+              (단, 관련 법령에 의해 보존할 필요가 있는 경우 해당 법령에서 정한 기간 동안 보관합니다.)
             </p>
           </section>
           <section>
-            <h3 className="mb-1.5 font-semibold text-[#1e293b]">4. 개인정보의 제3자 제공</h3>
-            <p className="leading-relaxed text-[#64748b]">수집된 개인정보는 상담 목적 외 제3자에게 제공되지 않습니다.</p>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">6. 동의를 거부할 권리 및 거부 시 불이익</h3>
+            <p className="leading-relaxed text-[#64748b]">
+              귀하는 개인정보 수집·이용 및 제3자 제공에 대한 동의를 거부할 권리가 있습니다.
+              단, 동의를 거부하실 경우 페이스북 양식을 통한 상담 접수 및 맞춤형 보험 안내 서비스 제공이 제한될 수 있습니다.
+            </p>
           </section>
           <section>
-            <h3 className="mb-1.5 font-semibold text-[#1e293b]">5. 동의 거부 권리 및 불이익</h3>
-            <p className="leading-relaxed text-[#64748b]">동의를 거부하실 경우 무료 보장 분석 서비스 이용이 제한될 수 있습니다.</p>
+            <h3 className="mb-1.5 font-semibold text-[#1e293b]">7. 개인정보 보호 문의</h3>
+            <p className="leading-relaxed text-[#64748b]">
+              본 양식을 통해 제출된 개인정보의 삭제, 처리 정지, 제3자 제공 동의 철회 등을 원하실 경우,
+              당사 고객센터(광고 관리자)를 통해 요청해 주시면 지체 없이 조치하겠습니다.
+            </p>
           </section>
         </div>
         <div className="border-t border-[#e2e8f0] px-6 py-4">
