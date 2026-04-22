@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: "무료 보험 분석 상담 | 와이즈피플코리아",
     template: "%s | 와이즈피플코리아",
   },
-  description: "내 보험, 제대로 보장받고 계신가요? 와이즈피플코리아 전문 FP가 무료로 1:1 맞춤 보장 분석을 해드립니다. 상담만 받아도 동남아 여행권 이벤트 응모 기회 제공.",
+  description: "내 보험 제대로 보장받고 계신가요? 전문 FP 무료 1:1 맞춤 보장 분석 + 동남아 여행권 이벤트.",
   keywords: ["보험 상담", "무료 보험 분석", "보장 분석", "보험료 절감", "암보험", "보험 비교", "보험 컨설팅", "와이즈피플코리아", "맞춤 보험", "보험 점검"],
   authors: [{ name: "와이즈피플코리아" }],
   creator: "와이즈피플코리아",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     url: BASE_URL,
     siteName: "와이즈피플코리아",
     title: "무료 보험 분석 상담 | 와이즈피플코리아",
-    description: "내 보험, 제대로 보장받고 계신가요? 전문 FP가 무료로 1:1 맞춤 보장 분석을 해드립니다.",
+    description: "내 보험 제대로 보장받고 계신가요? 전문 FP 무료 1:1 맞춤 보장 분석 + 동남아 여행권 이벤트.",
     images: [
       {
         url: "/seo.png",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "무료 보험 분석 상담 | 와이즈피플코리아",
-    description: "내 보험, 제대로 보장받고 계신가요? 전문 FP가 무료로 1:1 맞춤 보장 분석을 해드립니다.",
+    description: "내 보험 제대로 보장받고 계신가요? 전문 FP 무료 1:1 맞춤 보장 분석 + 동남아 여행권 이벤트.",
     images: ["/seo.png"],
   },
   verification: {
