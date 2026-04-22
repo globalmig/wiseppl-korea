@@ -9,7 +9,8 @@ const notoSansKR = Noto_Sans_KR({
   display: "swap",
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wiseppl-korea.vercel.app";
+const rawUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wiseppl-korea.vercel.app";
+const BASE_URL = rawUrl.startsWith("http") ? rawUrl : `https://${rawUrl}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
