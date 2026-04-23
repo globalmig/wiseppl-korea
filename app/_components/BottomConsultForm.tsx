@@ -290,6 +290,7 @@ export default function BottomConsultForm() {
 
         {/* 제출 버튼 */}
         <button
+          id="bottom-submit-btn"
           type="submit"
           disabled={loading}
           className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#1a56db] px-6 py-4 text-base font-bold text-white shadow-lg shadow-[#1a56db]/25 transition hover:bg-[#1648c0] hover:shadow-[#1a56db]/40 disabled:opacity-70"

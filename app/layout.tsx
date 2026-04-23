@@ -90,6 +90,8 @@ export default function RootLayout({
     <html lang="ko" className={`${notoSansKR.variable} scroll-smooth`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <script async src="https://cdn.onetag.co.kr/0/tcs.js?eid=1ibc14bxej1pg1ibc14bxe" />
+        <script dangerouslySetInnerHTML={{ __html: "window.CallMtm=window.CallMtm||function(){(window.CallMtm.q=window.CallMtm.q||[]).push(arguments)};CallMtm({productName:'무료보장분석신청',convType:'etc',click:'#bottom-submit-btn'});" }} />
       </head>
       <body className="min-h-screen flex flex-col antialiased" suppressHydrationWarning>
         {children}
