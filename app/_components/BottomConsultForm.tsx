@@ -40,36 +40,42 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
           <section>
             <h3 className="mb-1.5 font-semibold text-[#1e293b]">4. 개인정보의 제3자 제공</h3>
             <p className="leading-relaxed text-[#64748b] mb-2">
-              당사는 수집한 개인정보를 원활한 상담 및 맞춤형 금융서비스 제공을 위하여, 아래와 같이 제3자(제휴 보험대리점)에게 제공합니다.
-              양식을 제출하시는 것은 본 제3자 제공에 동의하는 것으로 간주됩니다.
+              당사는 수집한 개인정보를 원활한 상담 및 맞춤형 금융서비스 제공을 위하여, 아래와 같이 제3자(제휴 보험대리점)에게 제공합니다. 양식을 제출하시는 것은 본 제3자 제공에 동의하는 것으로
+              간주됩니다.
             </p>
             <ul className="space-y-1 text-[#64748b] leading-relaxed">
-              <li><span className="font-semibold text-[#475569]">제공받는 자:</span> (주)영진에셋, 글로벌금융, 신한금융파트너스, GA코리아, HK금융파트너스, 인카금융, 한화금융서비스</li>
-              <li><span className="font-semibold text-[#475569]">제공 목적:</span> 보험 상품 소개, 맞춤형 재무설계, TM(텔레마케팅) 상담 및 관련 영업 안내</li>
-              <li><span className="font-semibold text-[#475569]">제공 항목:</span> 이름, 휴대전화번호, 성별, 연령대, 거주지역 등 수집된 정보 일체</li>
-              <li><span className="font-semibold text-[#475569]">보유 및 이용 기간:</span> 제공받은 날로부터 1년</li>
+              <li>
+                <span className="font-semibold text-[#475569]">제공받는 자:</span> (주)영진에셋, 글로벌금융, 신한금융파트너스, GA코리아, HK금융파트너스, 인카금융, 한화금융서비스
+              </li>
+              <li>
+                <span className="font-semibold text-[#475569]">제공 목적:</span> 보험 상품 소개, 맞춤형 재무설계, TM(텔레마케팅) 상담 및 관련 영업 안내
+              </li>
+              <li>
+                <span className="font-semibold text-[#475569]">제공 항목:</span> 이름, 휴대전화번호, 성별, 연령대, 거주지역 등 수집된 정보 일체
+              </li>
+              <li>
+                <span className="font-semibold text-[#475569]">보유 및 이용 기간:</span> 제공받은 날로부터 1년
+              </li>
             </ul>
           </section>
           <section>
             <h3 className="mb-1.5 font-semibold text-[#1e293b]">5. 개인정보의 보유 및 이용 기간</h3>
             <p className="leading-relaxed text-[#64748b]">
-              수집된 개인정보는 동의일로부터 <strong className="text-[#1e293b]">1년간</strong> 보유 및 이용됩니다.
-              원칙적으로 개인정보 수집 및 이용 목적이 달성된 후, 또는 보유 기간(1년)이 경과한 후에는 해당 정보를 지체 없이 복구 불가능한 방법으로 파기합니다.
-              (단, 관련 법령에 의해 보존할 필요가 있는 경우 해당 법령에서 정한 기간 동안 보관합니다.)
+              수집된 개인정보는 동의일로부터 <strong className="text-[#1e293b]">1년간</strong> 보유 및 이용됩니다. 원칙적으로 개인정보 수집 및 이용 목적이 달성된 후, 또는 보유 기간(1년)이 경과한
+              후에는 해당 정보를 지체 없이 복구 불가능한 방법으로 파기합니다. (단, 관련 법령에 의해 보존할 필요가 있는 경우 해당 법령에서 정한 기간 동안 보관합니다.)
             </p>
           </section>
           <section>
             <h3 className="mb-1.5 font-semibold text-[#1e293b]">6. 동의를 거부할 권리 및 거부 시 불이익</h3>
             <p className="leading-relaxed text-[#64748b]">
-              귀하는 개인정보 수집·이용 및 제3자 제공에 대한 동의를 거부할 권리가 있습니다.
-              단, 동의를 거부하실 경우 페이스북 양식을 통한 상담 접수 및 맞춤형 보험 안내 서비스 제공이 제한될 수 있습니다.
+              귀하는 개인정보 수집·이용 및 제3자 제공에 대한 동의를 거부할 권리가 있습니다. 단, 동의를 거부하실 경우 페이스북 양식을 통한 상담 접수 및 맞춤형 보험 안내 서비스 제공이 제한될 수
+              있습니다.
             </p>
           </section>
           <section>
             <h3 className="mb-1.5 font-semibold text-[#1e293b]">7. 개인정보 보호 문의</h3>
             <p className="leading-relaxed text-[#64748b]">
-              본 양식을 통해 제출된 개인정보의 삭제, 처리 정지, 제3자 제공 동의 철회 등을 원하실 경우,
-              당사 고객센터(광고 관리자)를 통해 요청해 주시면 지체 없이 조치하겠습니다.
+              본 양식을 통해 제출된 개인정보의 삭제, 처리 정지, 제3자 제공 동의 철회 등을 원하실 경우, 당사 고객센터(광고 관리자)를 통해 요청해 주시면 지체 없이 조치하겠습니다.
             </p>
           </section>
         </div>
@@ -86,6 +92,7 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
 interface FormData {
   name: string;
   phone: string;
+  type: string;
   birthdate: string;
   region: string;
   agree: boolean;
@@ -94,6 +101,7 @@ interface FormData {
 interface FormErrors {
   name?: string;
   phone?: string;
+  type?: string;
   agree?: string;
 }
 
@@ -104,8 +112,9 @@ const InputIcon = ({ d }: { d: string }) => (
 );
 
 export default function BottomConsultForm() {
-  const [form, setForm] = useState<FormData>({ name: "", phone: "", birthdate: "", region: "", agree: false });
+  const [form, setForm] = useState<FormData>({ name: "", phone: "", type: "", birthdate: "", region: "", agree: false });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -118,6 +127,7 @@ export default function BottomConsultForm() {
     } else if (!/^01[0-9]{8,9}$/.test(form.phone.replace(/-/g, ""))) {
       next.phone = "휴대폰 번호를 정확히 입력해 주세요.";
     }
+    if (!form.type) next.type = "상담 유형을 선택해 주세요.";
     if (!form.agree) next.agree = "개인정보 수집 및 이용에 동의해 주세요.";
     return next;
   };
@@ -129,6 +139,7 @@ export default function BottomConsultForm() {
       setErrors(next);
       return;
     }
+    console.log("전송 데이터 확인:", form);
     setLoading(true);
     try {
       const res = await fetch("/api/inquiries", {
@@ -139,8 +150,8 @@ export default function BottomConsultForm() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "서버 오류");
       setSubmitted(true);
-    } catch (err) {
-      setErrors({ name: err instanceof Error ? err.message : "접수 중 오류가 발생했습니다." });
+    } catch {
+      setSubmitError("접수 중 오류가 발생했습니다. 다시 시도해 주세요.");
     } finally {
       setLoading(false);
     }
@@ -224,6 +235,22 @@ export default function BottomConsultForm() {
           {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
         </label>
 
+        {/* 상담 유형 */}
+        <div>
+          <span className="mb-2 block text-sm font-semibold text-[#334155]">
+            상담 유형 <span className="text-[#e85d04]">*</span>
+          </span>
+          <div className="flex">
+            {["보장분석", "암보험", "치아보험"].map((option) => (
+              <label key={option} className="flex flex-1 cursor-pointer gap-2 py-3 text-sm font-medium text-[#334155] transition has-[:checked]:border-[#1a56db] has-[:checked]:text-[#1a56db]">
+                <input type="radio" name="type" value={option} checked={form.type === option} onChange={handleChange} className="accent-[#1a56db]" />
+                {option}
+              </label>
+            ))}
+          </div>
+          {errors.type && <p className="mt-1 text-xs text-red-500">{errors.type}</p>}
+        </div>
+
         {/* 생년월일 + 지역 (2열) */}
         <div className="grid grid-cols-2 gap-3">
           <label className="block">
@@ -265,20 +292,10 @@ export default function BottomConsultForm() {
         <div className={`rounded-xl border p-4 transition-colors ${errors.agree ? "border-red-300 bg-red-50" : "border-[#e2e8f0] bg-[#f8fafc]"}`}>
           <div className="flex items-center justify-between">
             <label className="flex cursor-pointer items-center gap-2.5">
-              <input
-                type="checkbox"
-                name="agree"
-                checked={form.agree}
-                onChange={handleChange}
-                className="h-4 w-4 rounded accent-[#1a56db]"
-              />
+              <input type="checkbox" name="agree" checked={form.agree} onChange={handleChange} className="h-4 w-4 rounded accent-[#1a56db]" />
               <span className="text-xs font-semibold text-[#1e293b]">개인정보 수집 및 이용에 동의합니다.</span>
             </label>
-            <button
-              type="button"
-              onClick={() => setShowPrivacy(true)}
-              className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-[#1a56db] transition hover:bg-[#dbeafe]"
-            >
+            <button type="button" onClick={() => setShowPrivacy(true)} className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-[#1a56db] transition hover:bg-[#dbeafe]">
               내용 보기
               <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -287,6 +304,8 @@ export default function BottomConsultForm() {
           </div>
           {errors.agree && <p className="mt-1.5 ml-6 text-xs text-red-500">{errors.agree}</p>}
         </div>
+
+        {submitError && <p className="text-sm text-red-500 text-center">{submitError}</p>}
 
         {/* 제출 버튼 */}
         <button

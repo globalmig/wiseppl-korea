@@ -4,11 +4,12 @@ import { sendInquiryEmail } from "@/lib/sendEmail";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { name, phone, age, insuranceStatus, birthdate, region } = body;
+  const { name, phone, type, age, insuranceStatus, birthdate, region } = body;
 
   const { error } = await supabase.from("inquiries").insert({
     name,
     phone,
+    ...(type && { type }),
     ...(age && { age }),
     ...(insuranceStatus && { insurance_status: insuranceStatus }),
     ...(birthdate && { birthdate }),
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  await sendInquiryEmail({ name, phone, age, insuranceStatus, birthdate, region }).catch(() => {});
+  await sendInquiryEmail({ name, phone,age, insuranceStatus, birthdate, region }).catch(() => {});
 
   return NextResponse.json({ success: true });
 }
