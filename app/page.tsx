@@ -235,8 +235,8 @@ export default function Page() {
               </div> */}
 
                 {/* 캐릭터 */}
-                <div className="relative z-10">
-                  <Image src="/icon/family.png" alt="보장분석 캐릭터" width={430} height={380} className="h-auto w-[320px] md:w-[430px] object-contain " />
+                <div className="relative z-10 aspect-[430/380] w-[320px] md:w-[430px]">
+                  <Image src="/icon/family.png" alt="보장분석 캐릭터" fill className="object-contain" sizes="(max-width: 768px) 320px, 430px" />
                 </div>
 
                 {/* 하단 우측 카드 */}
