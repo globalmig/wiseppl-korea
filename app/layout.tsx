@@ -87,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${notoSansKR.variable} scroll-smooth`}>
+    <html lang="ko" className={`${notoSansKR.variable} scroll-smooth`} data-scroll-behavior="smooth">
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script async src="https://cdn.onetag.co.kr/0/tcs.js?eid=1ibc14bxej1pg1ibc14bxe" />

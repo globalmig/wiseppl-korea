@@ -145,8 +145,7 @@ export default function Page() {
                   width={520}
                   height={420}
                   priority
-                  className="w-full h-auto max-h-[45vh] object-contain object-bottom"
-                  style={{ filter: "drop-shadow(0 0 40px rgba(59,130,246,0.3))" }}
+                  style={{ filter: "drop-shadow(0 0 40px rgba(59,130,246,0.3))", width: "auto", height: "auto" }}
                 />
               </div>
             </div>
@@ -199,53 +198,11 @@ export default function Page() {
               </div>
 
               {/* 오른쪽 일러스트 */}
-              <div className="relative hidden md:flex items-center justify-center">
-                {/* 원형 배경 */}
-                <div className="absolute h-[420px] w-[420px] rounded-full bg-[#dbeafe] opacity-50" />
-
-                {/* 플로팅 아이콘들 */}
-                {/* <div className="absolute top-4 left-8 z-10 animate-float">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg border border-[#e2e8f0]">
-                  <span className="text-xl">🛡</span>
-                </div>
-              </div>
-              <div className="absolute top-4 right-8 z-10 animate-float-alt">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-lg border border-[#e2e8f0]">
-                  <span className="text-2xl">🏠</span>
-                </div>
-              </div>
-              <div className="absolute top-1/4 right-2 z-10 animate-float" style={{ animationDelay: "0.5s" }}>
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg border border-[#e2e8f0]">
-                  <span className="text-2xl">🪙</span>
-                </div>
-              </div> */}
-                {/* <div className="absolute left-2 top-1/3 z-10 animate-float-alt" style={{ animationDelay: "0.8s" }}>
-                <div className="flex h-12 w-16 items-center justify-center rounded-xl bg-white shadow-lg border border-[#e2e8f0]">
-                  <span className="text-2xl">💵</span>
-                </div>
-              </div> */}
-                {/* <div className="absolute right-6 top-1/2 z-10 animate-float" style={{ animationDelay: "1.2s" }}>
-                <div className="rounded-2xl border border-[#e2e8f0] bg-white px-3 py-2 shadow-lg">
-                  <div className="flex gap-1">
-                    <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
-                    <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
-                    <span className="h-2 w-2 rounded-full bg-[#94a3b8]" />
-                  </div>
-                </div>
-              </div> */}
-
+              <div className="relative flex items-center justify-center">
                 {/* 캐릭터 */}
-                <div className="relative z-10 aspect-[430/380] w-[320px] md:w-[430px]">
-                  <Image src="/icon/family.png" alt="보장분석 캐릭터" fill className="object-contain" sizes="(max-width: 768px) 320px, 430px" />
+                <div className="relative z-10 aspect-3/4 w-full md:w-135">
+                  <Image src="/260513.png" alt="보장분석 캐릭터" fill className="object-contain" sizes="(max-width: 768px) 420px, 540px" />
                 </div>
-
-                {/* 하단 우측 카드 */}
-                {/* <div className="absolute bottom-6 right-0 z-10">
-                <div className="rounded-2xl bg-[#0f2b5b] px-5 py-4 shadow-xl text-center">
-                  <p className="text-sm font-extrabold text-white">무료</p>
-                  <p className="text-xs text-[#93c5fd] mt-0.5">보장분석 서비스</p>
-                </div>
-              </div> */}
               </div>
             </div>
           </div>

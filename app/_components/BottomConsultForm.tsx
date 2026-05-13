@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function PrivacyModal({ onClose }: { onClose: () => void }) {
   return (
@@ -112,10 +113,10 @@ const InputIcon = ({ d }: { d: string }) => (
 );
 
 export default function BottomConsultForm() {
+  const router = useRouter();
   const [form, setForm] = useState<FormData>({ name: "", phone: "", type: "", birthdate: "", region: "", agree: false });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
 
@@ -149,7 +150,7 @@ export default function BottomConsultForm() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "서버 오류");
-      setSubmitted(true);
+      router.push("/complete");
     } catch {
       setSubmitError("접수 중 오류가 발생했습니다. 다시 시도해 주세요.");
     } finally {
@@ -164,22 +165,6 @@ export default function BottomConsultForm() {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
-
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center justify-center py-10 text-center">
-        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#ecfdf5] shadow-sm">
-          <svg className="h-8 w-8 text-[#059669]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="mb-2 text-xl font-bold text-[#1e293b]">상담 신청이 접수되었습니다</h3>
-        <p className="text-sm leading-relaxed text-[#64748b]">
-          담당 컨설턴트가 <strong className="text-[#1a56db]">24시간 이내</strong>에 연락드립니다.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <>
