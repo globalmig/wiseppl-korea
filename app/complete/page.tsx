@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 import SlowVideoBg from "../_components/SlowVideoBg";
 
 export default function CompletePage() {
@@ -8,6 +9,14 @@ export default function CompletePage() {
       <SlowVideoBg src="/video/bg_flight_01.mp4" rate={0.4} />
       {/* 오버레이 */}
       <div className="pointer-events-none absolute inset-0" style={{ zIndex: 1, background: "linear-gradient(135deg, rgba(10,22,40,0.88) 0%, rgba(13,32,69,0.85) 60%, rgba(7,20,40,0.90) 100%)" }} />
+
+      {/* 모비온 문의 완료 경로 전환스크립트 */}
+      <Script id="calldm-conversion" strategy="afterInteractive">{`
+        window['callDM'] = window['callDM'] || function (){
+          (window['callDM'].q = window['callDM'].q || []).push(arguments)
+        };
+        callDM();
+      `}</Script>
 
       <div className="relative z-10 w-full max-w-lg text-center" style={{ zIndex: 2 }}>
         {/* 로고 */}
