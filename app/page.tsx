@@ -60,7 +60,7 @@ export default function Page() {
               <p className="mt-5 mx-auto max-w-md text-sm sm:text-base leading-relaxed text-white/70">
                 지금 바로 보장 분석을 받아보세요.
                 <br />
-                상담만 받아도 여행 이벤트 참여 기회가 주어집니다.
+                상담만 받아도 동남아 무료 여행권을 드립니다.
               </p>
             </div>
 
@@ -70,7 +70,7 @@ export default function Page() {
                 href="#consult-form"
                 className="inline-flex h-13 items-center justify-center rounded-2xl bg-[#1a56db] px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-[#1a56db]/40 transition hover:bg-[#1648c0]"
               >
-                지금 상담하기 →
+                여행권 받고 상담하기 →
               </Link>
               <Link
                 href="#benefit-analysis"
@@ -356,11 +356,7 @@ export default function Page() {
                     <br />
                     <span className="text-[#1a56db]">여행이 공짜!</span>
                   </h2>
-                  <p className="mt-4 text-[15px] leading-relaxed text-[#64748b]">
-                    보험 상담 완료 시 추첨을 통해
-                    <br />
-                    국내외 여행권을 드립니다.
-                  </p>
+                  <p className="mt-4 text-[15px] leading-relaxed text-[#64748b]">&quot;상담완료 고객 100% 증정&quot;</p>
 
                   {/* 혜택 리스트 */}
                   <div className="mt-7 space-y-3">
@@ -384,7 +380,7 @@ export default function Page() {
 
                   {/* CTA */}
                   <a href="#consult-form" className="mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#1a56db] py-4 text-base font-bold text-white transition hover:bg-[#1648c0]">
-                    무료 상담 신청하고 응모하기
+                    지금 여행권 받고 상담하기
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
@@ -400,7 +396,7 @@ export default function Page() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-10">
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0f2b5b]">어디로 떠나실 건가요?</h2>
-              <p className="mt-3 text-sm text-[#64748b]">상담 완료 고객 추첨을 통해 아래 여행지 중 선물해드립니다</p>
+              <p className="mt-3 text-sm text-[#64748b]">상담완료 고객 모두 아래 여행지로 선물해 드립니다.</p>
             </div>
 
             {/* 메인 큰 이미지 2개 */}
