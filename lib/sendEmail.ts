@@ -1,40 +1,24 @@
 import { Resend } from "resend";
 
-const ageLabel: Record<string, string> = {
-  "20s": "20대",
-  "30s": "30대",
-  "40s": "40대",
-  "50s": "50대",
-  "60plus": "60대 이상",
-};
-const insuranceLabel: Record<string, string> = {
-  none: "보험 없음",
-  some: "일부 가입",
-  full: "여러 건 가입",
-  review: "점검 필요",
-};
-
 interface InquiryData {
   name: string;
   phone: string;
+  type?: string;
   age?: string;
-  insuranceStatus?: string;
-  birthdate?: string;
   region?: string;
 }
 
 export async function sendInquiryEmail(data: InquiryData) {
   if (!process.env.RESEND_API_KEY || !process.env.NOTIFICATION_EMAIL) return;
 
-  const { name, phone, age, insuranceStatus, birthdate, region } = data;
+  const { name, phone, type, age, region } = data;
 
   const rows = [
     ["이름", name],
     ["연락처", phone],
-    ...(birthdate ? [["생년월일", birthdate]] : []),
+    ...(type ? [["상담 유형", type]] : []),
+    ...(age ? [["나이", age]] : []),
     ...(region ? [["지역", region]] : []),
-    ...(age ? [["연령대", ageLabel[age] ?? age]] : []),
-    ...(insuranceStatus ? [["보험 상태", insuranceLabel[insuranceStatus] ?? insuranceStatus]] : []),
   ] as [string, string][];
 
   const tableRows = rows

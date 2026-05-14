@@ -17,7 +17,7 @@ export default async function InquiriesPage() {
   const { data, error } = await supabase.from("inquiries").select("*").order("created_at", { ascending: false });
 
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-screen bg-[#f8fafc] pb-69">
       <header className="sticky top-0 z-50 border-b border-[#e2e8f0] bg-white/95 backdrop-blur">
         <div className="max-w-6xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
           <Link href={"/"} className="flex items-center gap-3">

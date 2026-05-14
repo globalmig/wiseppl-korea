@@ -94,7 +94,7 @@ interface FormData {
   name: string;
   phone: string;
   type: string;
-  birthdate: string;
+  age: string;
   region: string;
   agree: boolean;
 }
@@ -114,7 +114,7 @@ const InputIcon = ({ d }: { d: string }) => (
 
 export default function BottomConsultForm() {
   const router = useRouter();
-  const [form, setForm] = useState<FormData>({ name: "", phone: "", type: "", birthdate: "", region: "", agree: false });
+  const [form, setForm] = useState<FormData>({ name: "", phone: "", type: "", age: "", region: "", agree: false });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -226,7 +226,7 @@ export default function BottomConsultForm() {
             상담 유형 <span className="text-[#e85d04]">*</span>
           </span>
           <div className="flex">
-            {["보장분석", "암보험", "치아보험"].map((option) => (
+            {["보험료 절감", "암보험"].map((option) => (
               <label key={option} className="flex flex-1 cursor-pointer gap-2 py-3 text-sm font-medium text-[#334155] transition has-[:checked]:border-[#1a56db] has-[:checked]:text-[#1a56db]">
                 <input type="radio" name="type" value={option} checked={form.type === option} onChange={handleChange} className="accent-[#1a56db]" />
                 {option}
@@ -239,16 +239,19 @@ export default function BottomConsultForm() {
         {/* 생년월일 + 지역 (2열) */}
         <div className="grid grid-cols-2 gap-3">
           <label className="block">
-            <span className="mb-1.5 block text-sm font-semibold text-[#334155]">생년월일</span>
+            <span className="mb-1.5 block text-sm font-semibold text-[#334155]">나이</span>
             <div className="relative">
               <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2">
-                <InputIcon d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                <InputIcon d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
               </span>
               <input
-                type="date"
-                name="birthdate"
-                value={form.birthdate}
+                type="number"
+                name="age"
+                value={form.age}
                 onChange={handleChange}
+                placeholder="나이 입력"
+                min={1}
+                max={120}
                 className="w-full rounded-xl border border-[#e2e8f0] bg-[#f8fafc] pl-10 pr-3 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:bg-white focus:ring-2 focus:ring-[#bfdbfe]"
               />
             </div>
