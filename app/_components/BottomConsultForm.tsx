@@ -17,12 +17,12 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
         </div>
         <div className="max-h-[60vh] overflow-y-auto px-6 py-5 text-sm text-[#334155] space-y-4">
           <p className="leading-relaxed text-[#64748b]">
-            온커넥트(이하 &ldquo;당사&rdquo;라 함)는 귀하의 개인정보를 매우 중요하게 생각하며, 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 등 관련 법령을 준수하고 있습니다.
-            당사는 페이스북(Meta) 광고 양식을 통해 수집되는 개인정보의 수집, 이용 및 제3자 제공 목적을 아래와 같이 안내해 드립니다.
+            와이즈피플코리아(이하 &ldquo;당사&rdquo;라 함)는 귀하의 개인정보를 매우 중요하게 생각하며, 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 등 관련 법령을 준수하고
+            있습니다. 당사는 페이스북(Meta) 광고 양식을 통해 수집되는 개인정보의 수집, 이용 및 제3자 제공 목적을 아래와 같이 안내해 드립니다.
           </p>
           <section>
             <h3 className="mb-1.5 font-semibold text-[#1e293b]">1. 개인정보 수집 및 이용 주체</h3>
-            <p className="leading-relaxed text-[#64748b]">수집 주체: 온커넥트</p>
+            <p className="leading-relaxed text-[#64748b]">수집 주체: 와이즈피플코리아</p>
             <p className="leading-relaxed text-[#64748b]">당사는 보험 상담 접수 및 서비스 안내를 목적으로 고객님의 개인정보를 직접 수집합니다.</p>
           </section>
           <section>
