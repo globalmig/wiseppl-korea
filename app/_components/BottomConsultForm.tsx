@@ -93,7 +93,6 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
 interface FormData {
   name: string;
   phone: string;
-  type: string;
   age: string;
   region: string;
   agree: boolean;
@@ -102,7 +101,8 @@ interface FormData {
 interface FormErrors {
   name?: string;
   phone?: string;
-  type?: string;
+  age?: string;
+  region?: string;
   agree?: string;
 }
 
@@ -114,7 +114,7 @@ const InputIcon = ({ d }: { d: string }) => (
 
 export default function BottomConsultForm() {
   const router = useRouter();
-  const [form, setForm] = useState<FormData>({ name: "", phone: "", type: "", age: "", region: "", agree: false });
+  const [form, setForm] = useState<FormData>({ name: "", phone: "", age: "", region: "", agree: false });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -128,7 +128,8 @@ export default function BottomConsultForm() {
     } else if (!/^01[0-9]{8,9}$/.test(form.phone.replace(/-/g, ""))) {
       next.phone = "휴대폰 번호를 정확히 입력해 주세요.";
     }
-    if (!form.type) next.type = "상담 유형을 선택해 주세요.";
+    if (!form.age) next.age = "나이를 입력해 주세요.";
+    if (!form.region.trim()) next.region = "지역을 입력해 주세요.";
     if (!form.agree) next.agree = "개인정보 수집 및 이용에 동의해 주세요.";
     return next;
   };
@@ -220,26 +221,12 @@ export default function BottomConsultForm() {
           {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
         </label>
 
-        {/* 상담 유형 */}
-        <div>
-          <span className="mb-2 block text-sm font-semibold text-[#334155]">
-            상담 유형 <span className="text-[#e85d04]">*</span>
-          </span>
-          <div className="flex">
-            {["보험료 절감", "암보험"].map((option) => (
-              <label key={option} className="flex flex-1 cursor-pointer gap-2 py-3 text-sm font-medium text-[#334155] transition has-[:checked]:border-[#1a56db] has-[:checked]:text-[#1a56db]">
-                <input type="radio" name="type" value={option} checked={form.type === option} onChange={handleChange} className="accent-[#1a56db]" />
-                {option}
-              </label>
-            ))}
-          </div>
-          {errors.type && <p className="mt-1 text-xs text-red-500">{errors.type}</p>}
-        </div>
-
         {/* 생년월일 + 지역 (2열) */}
         <div className="grid grid-cols-2 gap-3">
           <label className="block">
-            <span className="mb-1.5 block text-sm font-semibold text-[#334155]">나이</span>
+            <span className="mb-1.5 block text-sm font-semibold text-[#334155]">
+              나이 <span className="text-[#e85d04]">*</span>
+            </span>
             <div className="relative">
               <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2">
                 <InputIcon d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -252,13 +239,18 @@ export default function BottomConsultForm() {
                 placeholder="나이 입력"
                 min={1}
                 max={120}
-                className="w-full rounded-xl border border-[#e2e8f0] bg-[#f8fafc] pl-10 pr-3 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:bg-white focus:ring-2 focus:ring-[#bfdbfe]"
+                className={`w-full rounded-xl border pl-10 pr-3 py-3 text-sm text-[#0f172a] outline-none transition focus:ring-2 focus:ring-[#bfdbfe] ${
+                  errors.age ? "border-red-400 bg-red-50" : "border-[#e2e8f0] bg-[#f8fafc] focus:border-[#1a56db] focus:bg-white"
+                }`}
               />
             </div>
+            {errors.age && <p className="mt-1 text-xs text-red-500">{errors.age}</p>}
           </label>
 
           <label className="block">
-            <span className="mb-1.5 block text-sm font-semibold text-[#334155]">지역</span>
+            <span className="mb-1.5 block text-sm font-semibold text-[#334155]">
+              지역 <span className="text-[#e85d04]">*</span>
+            </span>
             <div className="relative">
               <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2">
                 <InputIcon d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
@@ -269,9 +261,12 @@ export default function BottomConsultForm() {
                 value={form.region}
                 onChange={handleChange}
                 placeholder="서울 강남구"
-                className="w-full rounded-xl border border-[#e2e8f0] bg-[#f8fafc] pl-10 pr-3 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1a56db] focus:bg-white focus:ring-2 focus:ring-[#bfdbfe]"
+                className={`w-full rounded-xl border pl-10 pr-3 py-3 text-sm text-[#0f172a] outline-none transition focus:ring-2 focus:ring-[#bfdbfe] ${
+                  errors.region ? "border-red-400 bg-red-50" : "border-[#e2e8f0] bg-[#f8fafc] focus:border-[#1a56db] focus:bg-white"
+                }`}
               />
             </div>
+            {errors.region && <p className="mt-1 text-xs text-red-500">{errors.region}</p>}
           </label>
         </div>
 
