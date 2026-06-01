@@ -92,6 +92,7 @@ export default function RootLayout({
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script async src="https://cdn.onetag.co.kr/0/tcs.js?eid=1ibc14bxej1pg1ibc14bxe" />
+        <script async src="https://www.mig-analytics.com/one/686ba5eb-0490-4f20-a83f-a73d858b7dbb.js" />
       </head>
       <body className="min-h-screen flex flex-col antialiased" suppressHydrationWarning>
         {children}
