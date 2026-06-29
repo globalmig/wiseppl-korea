@@ -18,6 +18,11 @@ export default function CompletePage() {
         callDM();
       `}</Script>
 
+      {/* Meta 전환 이벤트 - 문의 완료 */}
+      <Script id="meta-lead" strategy="afterInteractive">{`
+        fbq('track', 'Lead');
+      `}</Script>
+
       <div className="relative z-10 w-full max-w-lg text-center" style={{ zIndex: 2 }}>
         {/* 로고 */}
         <div className="flex items-center justify-center gap-2 mb-12">
